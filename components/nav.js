@@ -1,3 +1,4 @@
+import { Fragment, useState } from 'react';
 import styled from 'styled-components';
 
 const Brand = styled.span`
@@ -20,7 +21,7 @@ const StyledNav = styled.nav`
   justify-content: space-between;
 `;
 
-const NavButton = styled.a`
+const NavLink = styled.a`
   display: inline-block;
   line-height: 35px;
   height: 35px;
@@ -35,6 +36,24 @@ const NavButton = styled.a`
   font-weight: 700;
   text-decoration: none;
   text-align: center;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: #ddd;
+    font-weight: bold;
+  }
+`;
+const NavButton = styled.button`
+  height: 35px;
+  width: 90px;
+  color: #ccc;
+  border: solid 1px #ccc;
+  background: inherit;
+  margin: 0 1vw 0 1vw;
+  border-radius: 0.5vw;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   padding: 0;
 
@@ -79,6 +98,8 @@ const HiddenMenu = styled.div`
 `;
 
 const Nav = () => {
+  // this will be moved into a consumer
+  const [loggedIn, toggleLoggedIn] = useState(false);
   return (
     <StyledNav>
       <Brand>Link Tracker</Brand>
@@ -90,8 +111,18 @@ const Nav = () => {
         }}
       >
         <CollapsingDiv>
-          <NavButton href="/register">Register</NavButton>
-          <NavButton href="/login">Login</NavButton>
+          {loggedIn ? (
+            <NavButton>Logout</NavButton>
+          ) : (
+            <Fragment>
+              <NavLink href="/register" alt="Register Page">
+                Register
+              </NavLink>
+              <NavLink href="/login" alt="Login Page">
+                Login
+              </NavLink>
+            </Fragment>
+          )}
         </CollapsingDiv>
         <HiddenMenu>
           <NavIconButton type="button">
