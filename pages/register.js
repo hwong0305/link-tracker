@@ -1,12 +1,34 @@
+import {
+  MainContainer,
+  Card,
+  Form,
+  FormTitle,
+  FormButton,
+  FormInput,
+} from '../util/form';
+
 const Register = () => {
   return (
-    <div>
-      <h3>Register</h3>
-      <form>
-        <input type="text" name="username" placeholder="Username"></input>
-        <input type="password" name="password" placeholder="Password"></input>
-      </form>
-    </div>
+    <MainContainer>
+      <Card>
+        <FormTitle>Register</FormTitle>
+        <Form>
+          <FormInput
+            type="text"
+            name="username"
+            placeholder="Username"
+          ></FormInput>
+          <FormInput
+            type="password"
+            name="password"
+            placeholder="Password"
+          ></FormInput>
+          <FormButton type="button" style={{ marginBottom: '2.5rem' }}>
+            Register
+          </FormButton>
+        </Form>
+      </Card>
+    </MainContainer>
   );
 };
 

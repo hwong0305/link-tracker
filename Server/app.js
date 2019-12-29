@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import authRouter from './routers/authRouter';
 import config from './config/config';
 import { sequelize } from './db';
@@ -6,6 +7,7 @@ import { sequelize } from './db';
 const { PORT } = config;
 
 const app = express();
+app.use(cors());
 app.use(express.json()); // This replaces body-parser
 
 app.use('/users', authRouter);
