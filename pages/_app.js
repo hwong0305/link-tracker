@@ -27,10 +27,6 @@ function App(props) {
     <Fragment>
       <Head>
         <title>Link Tracker</title>
-        <link
-          href="https://fonts.googleapis.com/css?family=Coda&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <GlobalStyle />
       <AuthContext.Provider

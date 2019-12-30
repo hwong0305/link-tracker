@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
+import Landing from '../components/landing';
 
 const MainPage = styled.div`
   position: absolute;
@@ -15,6 +16,15 @@ const MainPage = styled.div`
   width: 100%;
   overflow: auto;
 `;
+
+const NoSSRLanding = dynamic(
+  () => {
+    return import('../components/landing');
+  },
+  {
+    ssr: false,
+  }
+);
 
 const NoSSRNav = dynamic(
   () => {
@@ -32,28 +42,17 @@ const NoSSRPost = dynamic(
   { ssr: false }
 );
 
-const NoSSRLanding = dynamic(
-  () => {
-    return import('../components/landing');
-  },
-  { ssr: false }
-);
-
-const App = ({ loading }) => {
+const App = () => {
   const { loggedIn } = useContext(AuthContext);
   return (
     <div>
       <NoSSRNav />
       <MainPage>
-        <NoSSRLanding />
+        {!loggedIn && <NoSSRLanding></NoSSRLanding>}
         {loggedIn && <NoSSRPost></NoSSRPost>}
       </MainPage>
     </div>
   );
-};
-
-App.getInitialProps = async ({ req }) => {
-  return { loading: !!req };
 };
 
 export default App;

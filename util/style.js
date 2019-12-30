@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'Coda';
+    src: url('/static/fonts/Coda-Regular.ttf');
+  }
   html,
   body {
     margin: 0;
