@@ -1,6 +1,7 @@
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useState } from 'react';
 import { ThreeBars } from 'styled-icons/octicons/ThreeBars';
 import { AuthContext } from '../context/authContext';
+import MobileMenu from './mobileMenu';
 
 import {
   Brand,
@@ -13,11 +14,19 @@ import {
 } from '../util/nav';
 
 const Nav = () => {
+  const [toggle, setToggle] = useState(false);
   const { loggedIn, changeLoggedIn, setUser, setToken } = useContext(
     AuthContext
   );
   return (
     <StyledNav>
+      {toggle && (
+        <MobileMenu
+          click={() => {
+            setToggle(!toggle);
+          }}
+        />
+      )}
       <Brand>Link Tracker</Brand>
       <div
         style={{
@@ -49,7 +58,12 @@ const Nav = () => {
           )}
         </CollapsingDiv>
         <HiddenMenu>
-          <NavIconButton type="button">
+          <NavIconButton
+            type="button"
+            onClick={() => {
+              return setToggle(!toggle);
+            }}
+          >
             <ThreeBars size="34" />
           </NavIconButton>
         </HiddenMenu>

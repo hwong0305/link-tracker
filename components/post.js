@@ -19,6 +19,7 @@ const Post = () => {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
   const [data, setData] = useState([]);
+  const [err, setErr] = useState('');
   const { user, token } = useContext(AuthContext);
 
   const headers = ['Title', 'Link'];
@@ -63,6 +64,10 @@ const Post = () => {
         setData([...data, { Title: postData.title, Link: postData.link }]);
         setTitle('');
         setLink('');
+      })
+      .catch(err => {
+        console.log(err);
+        setErr('The Title and Post fields are required');
       });
   };
   return (
@@ -90,6 +95,7 @@ const Post = () => {
         <PostButton type="button" onClick={addPost}>
           Create
         </PostButton>
+        <p style={{ color: 'red' }}>{err}</p>
       </PostForm>
       <table>
         <thead>
