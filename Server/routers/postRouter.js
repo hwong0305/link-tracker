@@ -2,7 +2,6 @@ import express from 'express';
 import db from '../db';
 
 const { Post } = db;
-
 const postRouter = express.Router();
 
 postRouter.get('/', async (req, res) => {
@@ -28,7 +27,8 @@ postRouter.get('/:id', async (req, res) => {
 postRouter.post('/', async (req, res) => {
   try {
     const { link, title } = req.body;
-    const post = await Post.create({ link, title });
+    const { id: UserId } = req.user;
+    const post = await Post.create({ link, title, UserId });
     res.json(post);
   } catch (err) {
     console.log(err);

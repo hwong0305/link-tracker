@@ -2,15 +2,16 @@ import express from 'express';
 import { hashPassword, comparePassword } from '../auth/crypto';
 import db from '../db';
 import { signJwtToken } from '../auth/jwt';
+import isAuthenticated from '../auth/authentication';
 
 const { Post, User } = db;
 const userRouter = express.Router();
 
-userRouter.get('/:id/posts', async (req, res) => {
+userRouter.get('/posts', isAuthenticated, async (req, res) => {
   try {
     const posts = await Post.findAll({
       where: {
-        UserId: req.params.id,
+        UserId: req.user.id,
       },
     });
     res.json(posts);

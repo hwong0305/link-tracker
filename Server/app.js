@@ -5,6 +5,9 @@ import userRouter from './routers/userRouter';
 import config from './config/config';
 import { sequelize } from './db';
 import postRouter from './routers/postRouter';
+import './auth/passport';
+
+import isAuthenticated from './auth/authentication';
 
 const { PORT } = config;
 
@@ -12,8 +15,8 @@ const app = express();
 app.use(cors());
 app.use(express.json()); // This replaces body-parser
 
-app.use('/admin', adminRouter);
-app.use('/posts', postRouter);
+app.use('/admin', isAuthenticated, adminRouter);
+app.use('/posts', isAuthenticated, postRouter);
 app.use('/users', userRouter);
 app.get('/', (req, res) => {
   res.send('Hello World');
