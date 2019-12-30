@@ -36,7 +36,7 @@ userRouter.post('/login', async (req, res) => {
     // Sequelize doesn't return a plain object. toJSON method converts it to JSON
     const userJSON = user.toJSON();
     const token = signJwtToken(userJSON);
-    res.json({ user: userJSON, token });
+    res.json({ username: userJSON.username, token });
   } catch (err) {
     console.log(err);
     res.status(500).send('Error logging in');
@@ -55,11 +55,7 @@ userRouter.post('/register', async (req, res) => {
     // Sequelize doesn't return a plain object. toJSON method converts it to JSON
     const userJSON = user.toJSON();
     const token = signJwtToken(userJSON);
-    res.json({
-      user: userJSON,
-      token,
-    });
-    return res.json(user);
+    res.json({ username: userJSON.username, token });
   } catch (err) {
     console.log(err);
     res.status(500).send('Error registering a user');
