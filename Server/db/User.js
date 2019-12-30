@@ -9,5 +9,9 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
+
+  User.associate = models => {
+    User.hasMany(models.Post, { as: 'posts' });
+  };
   return User;
 };

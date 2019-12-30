@@ -23,4 +23,10 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
+Object.keys(db).forEach(model => {
+  if (db[model].associate) {
+    db[model].associate(db);
+  }
+});
+
 export default db;
