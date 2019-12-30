@@ -17,6 +17,7 @@ const { API_URL } = config;
 const Login = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [err, setErr] = useState('');
   const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
   const loginUser = async () => {
     const userRes = await fetch(`${API_URL}/users/login`, {
@@ -28,7 +29,7 @@ const Login = () => {
       body: JSON.stringify({ username, password }),
     });
     if (!userRes.ok) {
-      alert('Login Information is incorrect');
+      setErr('Incorrect username or password');
     } else {
       const { token } = await userRes.json();
       changeLoggedIn(true);
@@ -41,6 +42,9 @@ const Login = () => {
     <MainContainer>
       <Card>
         <FormTitle>Login</FormTitle>
+        <p style={{ color: 'red', marginLeft: '1rem', marginRight: '0.5rem' }}>
+          {err}
+        </p>
         <Form>
           <FormInput
             type="text"

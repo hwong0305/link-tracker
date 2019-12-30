@@ -20,6 +20,11 @@ const Post = () => {
   return (
     <div>
       <h1>Hello User!</h1>
+      <form>
+        <input type="text" name="title"></input>
+        <input type="text" name="link"></input>
+        <button type="button">Add Link</button>
+      </form>
       <table style={{ marginTop: '3rem' }}>
         <thead>
           <tr>

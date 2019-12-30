@@ -35,7 +35,7 @@ userRouter.post('/login', async (req, res) => {
       return res.status(400).send('User does not exist');
     }
     const { password: hash } = user;
-    const match = comparePassword(password, hash);
+    const match = await comparePassword(password, hash);
     if (!match) {
       return res.status(400).send('Invalid Password');
     }
