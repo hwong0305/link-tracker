@@ -10,6 +10,19 @@ export default function App(props) {
     <Fragment>
       <Head>
         <title>Link Tracker</title>
+        <style jsx global>
+          {`
+            html,
+            body {
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
+            }
+            * {
+              box-sizing: border-box;
+            }
+          `}
+        </style>
       </Head>
       <AuthContext.Provider value={{ user, loggedIn, setUser, changeLoggedIn }}>
         <Component {...pageProps} />
