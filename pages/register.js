@@ -14,8 +14,8 @@ import {
 const { API_URL } = config;
 
 const Register = () => {
-  const [user, setUserName] = useState('');
-  const [pass, setPass] = useState('');
+  const [username, setUserName] = useState('');
+  const [password, setPassword] = useState('');
   const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
   const registerUser = async () => {
     const userRes = await fetch(`${API_URL}/users/register`, {
@@ -24,13 +24,13 @@ const Register = () => {
         'Content-Type': 'application/json',
       },
       mode: 'cors',
-      body: JSON.stringify({ username: user, password: pass }),
+      body: JSON.stringify({ username, password }),
     });
 
     if (!userRes.ok) {
       alert('Registration information incorrect');
     } else {
-      const { username, token } = await userRes.json();
+      const { token } = await userRes.json();
       changeLoggedIn(true);
       setUser(username);
       setToken(token);
@@ -46,7 +46,7 @@ const Register = () => {
             type="text"
             name="username"
             placeholder="Username"
-            value={user}
+            value={username}
             onChange={e => {
               setUserName(e.target.value);
             }}
@@ -55,9 +55,9 @@ const Register = () => {
             type="password"
             name="password"
             placeholder="Password"
-            value={pass}
+            value={password}
             onChange={e => {
-              setPass(e.target.value);
+              setPassword(e.target.value);
             }}
           ></FormInput>
           <FormButton

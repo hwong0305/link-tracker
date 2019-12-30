@@ -13,8 +13,9 @@ import {
 } from '../util/nav';
 
 const Nav = () => {
-  // this will be moved into a consumer
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, changeLoggedIn, setUser, setToken } = useContext(
+    AuthContext
+  );
   return (
     <StyledNav>
       <Brand>Link Tracker</Brand>
@@ -27,7 +28,15 @@ const Nav = () => {
       >
         <CollapsingDiv>
           {loggedIn ? (
-            <NavButton>Logout</NavButton>
+            <NavButton
+              onClick={() => {
+                changeLoggedIn(false);
+                setUser('');
+                setToken('');
+              }}
+            >
+              Logout
+            </NavButton>
           ) : (
             <Fragment>
               <NavLink href="/register" alt="Sign Up">
