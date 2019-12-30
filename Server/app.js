@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import adminRouter from './routers/adminRouter';
-import authRouter from './routers/authRouter';
+import userRouter from './routers/userRouter';
 import config from './config/config';
 import { sequelize } from './db';
 import postRouter from './routers/postRouter';
@@ -13,8 +13,8 @@ app.use(cors());
 app.use(express.json()); // This replaces body-parser
 
 app.use('/admin', adminRouter);
-app.use('/users', authRouter);
 app.use('/posts', postRouter);
+app.use('/users', userRouter);
 app.get('/', (req, res) => {
   res.send('Hello World');
 });

@@ -3,9 +3,9 @@ import { hashPassword, comparePassword } from '../auth/crypto';
 import db from '../db';
 
 const { User } = db;
-const authRouter = express.Router();
+const userRouter = express.Router();
 
-authRouter.post('/login', async (req, res) => {
+userRouter.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ where: { username } });
@@ -24,7 +24,7 @@ authRouter.post('/login', async (req, res) => {
   }
 });
 
-authRouter.post('/register', async (req, res) => {
+userRouter.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
     const existingUser = await User.findOne({ where: { username } });
@@ -40,4 +40,4 @@ authRouter.post('/register', async (req, res) => {
   }
 });
 
-export default authRouter;
+export default userRouter;
