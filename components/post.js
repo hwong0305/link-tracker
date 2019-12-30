@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import config from '../config/config';
 import { AuthContext } from '../context/authContext';
@@ -18,25 +18,34 @@ const PostDiv = styled.div`
 const Post = () => {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const [data, setData] = useState([]);
   const { user, token } = useContext(AuthContext);
-  const data = [
-    {
-      Title: 'F-650 Truck Review',
-      Link: 'https://www.youtube.com/watch?v=JrHDeSMvnt4',
-    },
-    {
-      Title: 'Dodge Ram SRT-10',
-      Link: 'https://www.youtube.com/watch?v=2YKGMtv20cs',
-    },
-    {
-      Title: 'G63 AMG 6X6 Truck',
-      Link: 'https://www.youtube.com/watch?v=zrESlrGCALM',
-    },
-    {
-      Title: 'Koenigsegg Agera RS1',
-      Link: 'https://www.youtube.com/watch?v=_eXcPKdarLQ',
-    },
-  ];
+
+  const headers = ['Title', 'Link'];
+
+  useEffect(() => {
+    fetch(`${API_URL}/users/posts`, {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(res => {
+        if (!res.ok) {
+          alert('error');
+        } else {
+          return res.json();
+        }
+      })
+      .then(pData => {
+        setData(
+          pData.map(post => {
+            return { Title: post.title, Link: post.link };
+          })
+        );
+      });
+  }, []);
   const addPost = () => {
     console.log(token);
     setTitle('');
@@ -71,7 +80,7 @@ const Post = () => {
       <table>
         <thead>
           <tr>
-            {Object.keys(data[0]).map((h, i) => {
+            {headers.map((h, i) => {
               return <th key={i}>{h}</th>;
             })}
           </tr>
@@ -88,7 +97,7 @@ const Post = () => {
                         <Fragment>
                           <a href={v} className="desktop__table__link">
                             {v}
-                          </a>{' '}
+                          </a>
                           <a className="mobile__link" href={v}>
                             Link
                           </a>

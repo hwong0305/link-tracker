@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
-import Landing from '../components/landing';
 
 const MainPage = styled.div`
   position: absolute;
