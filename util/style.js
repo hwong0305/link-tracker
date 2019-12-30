@@ -17,6 +17,8 @@ export const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     text-align: left;
     width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
   }
   table tr {
     border-bottom: 1px solid;
@@ -43,7 +45,13 @@ export const GlobalStyle = createGlobalStyle`
   tbody tr:hover {
     background: #eee;
   }
+  table td .mobile__link {
+    display: none;
+  }
   @media (max-width: 760px) {
+    table {
+      margin-bottom: 6rem;
+    }
     table thead {
       left: -9999px;
       position: absolute;
@@ -54,7 +62,6 @@ export const GlobalStyle = createGlobalStyle`
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      margin-bottom: 40px;
     }
     table td {
       border: 1px solid;
@@ -65,6 +72,15 @@ export const GlobalStyle = createGlobalStyle`
     }
     table td span {
       display: block;
+    }
+  }
+  @media (max-width: 550px) {
+    table td .desktop__table__link {
+      display: none;
+    }
+
+    table td .mobile__link {
+     display: inline-block;
     }
   }
 `;

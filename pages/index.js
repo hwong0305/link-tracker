@@ -1,29 +1,59 @@
 import styled from 'styled-components';
+import dynamic from 'next/dynamic';
 import { useContext } from 'react';
 import { AuthContext } from '../context/authContext';
-import Nav from '../components/nav';
-import Landing from '../components/landing';
-import Post from '../components/post';
 
 const MainPage = styled.div`
   position: absolute;
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   top: 70px;
   left: 0;
   height: 100%;
   width: 100%;
+  overflow: auto;
 `;
 
-const App = () => {
+const NoSSRNav = dynamic(
+  () => {
+    return import('../components/nav');
+  },
+  {
+    ssr: false,
+  }
+);
+
+const NoSSRPost = dynamic(
+  () => {
+    return import('../components/post');
+  },
+  { ssr: false }
+);
+
+const NoSSRLanding = dynamic(
+  () => {
+    return import('../components/landing');
+  },
+  { ssr: false }
+);
+
+const App = ({ loading }) => {
   const { loggedIn } = useContext(AuthContext);
   return (
     <div>
-      <Nav />
-      <MainPage>{loggedIn ? <Post></Post> : <Landing></Landing>}</MainPage>
+      <NoSSRNav />
+      <MainPage>
+        <NoSSRLanding />
+        {loggedIn && <NoSSRPost></NoSSRPost>}
+      </MainPage>
     </div>
   );
+};
+
+App.getInitialProps = async ({ req }) => {
+  return { loading: !!req };
 };
 
 export default App;

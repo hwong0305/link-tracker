@@ -71,9 +71,8 @@ const Login = () => {
           >
             Login
           </FormButton>
-          <Link>
+          <Link href="/register">
             <a
-              href="/register"
               style={{
                 fontSize: '0.9rem',
                 marginBottom: '1.5rem',

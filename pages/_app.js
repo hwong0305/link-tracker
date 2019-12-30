@@ -1,13 +1,28 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { AuthContext } from '../context/authContext';
 import { GlobalStyle } from '../util/style';
 
-export default function App(props) {
+function App(props) {
   const { Component, pageProps } = props;
   const [user, setUser] = useState('');
   const [loggedIn, changeLoggedIn] = useState(false);
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    const data = localStorage.getItem('userstate');
+    if (data) {
+      const { user: tokenUser, token: tokenToken } = JSON.parse(data);
+      setUser(tokenUser);
+      setToken(tokenToken);
+      changeLoggedIn(!!tokenUser);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('userstate', JSON.stringify({ user, token }));
+  });
+
   return (
     <Fragment>
       <Head>
@@ -26,3 +41,5 @@ export default function App(props) {
     </Fragment>
   );
 }
+
+export default App;
