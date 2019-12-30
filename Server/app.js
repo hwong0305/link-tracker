@@ -4,6 +4,7 @@ import adminRouter from './routers/adminRouter';
 import authRouter from './routers/authRouter';
 import config from './config/config';
 import { sequelize } from './db';
+import postRouter from './routers/postRouter';
 
 const { PORT } = config;
 
@@ -13,11 +14,12 @@ app.use(express.json()); // This replaces body-parser
 
 app.use('/admin', adminRouter);
 app.use('/users', authRouter);
+app.use('/posts', postRouter);
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`Now listening on Port ${PORT}`);
   });

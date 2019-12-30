@@ -7,10 +7,11 @@ const adminRouter = express.Router();
 
 adminRouter.get('/users', async (req, res) => {
   try {
-    const users = await User.find();
-    res.json(users);
+    const users = await User.findAll();
+    console.log(users);
+    res.json(users || {});
   } catch (err) {
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Error getting users');
   }
 });
 

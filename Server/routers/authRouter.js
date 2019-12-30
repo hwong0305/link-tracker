@@ -20,7 +20,7 @@ authRouter.post('/login', async (req, res) => {
     return res.json(user);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Error logging in');
   }
 });
 
@@ -36,7 +36,7 @@ authRouter.post('/register', async (req, res) => {
     return res.json(user);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Internal Server Error');
+    res.status(500).send('Error registerting a user');
   }
 });
 
