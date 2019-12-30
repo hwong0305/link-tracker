@@ -1,3 +1,7 @@
+# link-tracker
+
+A web application that allows users to save links which are automatically deleted periodically.
+
 # Example app with styled-components
 
 ## Deploy your own
