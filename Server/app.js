@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import adminRouter from './routers/adminRouter';
 import userRouter from './routers/userRouter';
-import config from './config/config';
+import config from '../config/config';
 import { sequelize } from './db';
 import postRouter from './routers/postRouter';
 import './auth/passport';

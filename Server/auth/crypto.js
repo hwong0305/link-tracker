@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 // Using less secure crypto method to hash URLs
 import CryptoJS from 'crypto-js';
-import config from '../config/config';
+import config from '../../config/config';
 
 const SALT_ROUNDS = 12;
 const { AES } = CryptoJS;

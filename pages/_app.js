@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import Head from 'next/head';
-import { AuthContext } from '../context/authContest';
+import { AuthContext } from '../context/authContext';
 import { GlobalStyle } from '../util/style';
 
 export default function App(props) {

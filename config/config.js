@@ -1,4 +1,5 @@
 export default {
+  API_URL: process.env.API_URL || 'http://localhost:8888',
   CLIENT_URL: process.env.CLIENT_URL || 'http://localhost:3000',
   PORT: process.env.PORT || 8888,
   DB_NAME: process.env.DB_NAME || 'linktracker',

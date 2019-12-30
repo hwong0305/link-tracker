@@ -1,6 +1,6 @@
 import passport from 'passport';
 import passportJWT from 'passport-jwt';
-import config from '../config/config';
+import config from '../../config/config';
 import db from '../db';
 
 const { Strategy: JwtStrategy, ExtractJwt } = passportJWT;

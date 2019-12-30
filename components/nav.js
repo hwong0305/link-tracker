@@ -1,6 +1,6 @@
 import { Fragment, useContext } from 'react';
 import { ThreeBars } from 'styled-icons/octicons/ThreeBars';
-import { AuthContext } from '../context/authContest';
+import { AuthContext } from '../context/authContext';
 
 import {
   Brand,

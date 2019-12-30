@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
-import { AuthContext } from '../context/authContest';
+import { AuthContext } from '../context/authContext';
 import Nav from '../components/nav';
 import Landing from '../components/landing';
 import Post from '../components/post';
