@@ -1,6 +1,7 @@
 import express from 'express';
 import { hashPassword, comparePassword } from '../auth/crypto';
 import db from '../db';
+import { signJwtToken } from '../auth/jwt';
 
 const { Post, User } = db;
 const userRouter = express.Router();
@@ -31,7 +32,10 @@ userRouter.post('/login', async (req, res) => {
     if (!match) {
       return res.status(400).send('Invalid Password');
     }
-    return res.json(user);
+    // Sequelize doesn't return a plain object. toJSON method converts it to JSON
+    const userJSON = user.toJSON();
+    const token = signJwtToken(userJSON);
+    res.json({ user: userJSON, token });
   } catch (err) {
     console.log(err);
     res.status(500).send('Error logging in');
@@ -47,6 +51,13 @@ userRouter.post('/register', async (req, res) => {
     }
     const hash = await hashPassword(password);
     const user = await User.create({ username, password: hash });
+    // Sequelize doesn't return a plain object. toJSON method converts it to JSON
+    const userJSON = user.toJSON();
+    const token = signJwtToken(userJSON);
+    res.json({
+      user: userJSON,
+      token,
+    });
     return res.json(user);
   } catch (err) {
     console.log(err);
