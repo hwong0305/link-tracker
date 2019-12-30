@@ -27,8 +27,8 @@ authRouter.post('/login', async (req, res) => {
 authRouter.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
-    const existingUser = User.findOne({ where: { username } });
-    if (!existingUser) {
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) {
       return res.status(400).send('User already exists');
     }
     const hash = await hashPassword(password);
@@ -36,7 +36,7 @@ authRouter.post('/register', async (req, res) => {
     return res.json(user);
   } catch (err) {
     console.log(err);
-    res.status(500).send('Error registerting a user');
+    res.status(500).send('Error registering a user');
   }
 });
 
