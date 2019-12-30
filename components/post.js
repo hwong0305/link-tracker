@@ -1,5 +1,3 @@
-import { PostStyle } from '../util/style';
-
 const Post = () => {
   const data = [
     {
@@ -21,7 +19,6 @@ const Post = () => {
   ];
   return (
     <div>
-      <PostStyle />
       <h1>Hello User!</h1>
       <table style={{ marginTop: '3rem' }}>
         <thead>

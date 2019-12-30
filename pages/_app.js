@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react';
 import Head from 'next/head';
 import { AuthContext } from '../context/authContest';
+import { GlobalStyle } from '../util/style';
 
 export default function App(props) {
   const { Component, pageProps } = props;
@@ -14,20 +15,8 @@ export default function App(props) {
           href="https://fonts.googleapis.com/css?family=Coda&display=swap"
           rel="stylesheet"
         />
-        <style jsx global>
-          {`
-            html,
-            body {
-              margin: 0;
-              padding: 0;
-              overflow: hidden;
-            }
-            * {
-              box-sizing: border-box;
-            }
-          `}
-        </style>
       </Head>
+      <GlobalStyle />
       <AuthContext.Provider value={{ user, loggedIn, setUser, changeLoggedIn }}>
         <Component {...pageProps} />
       </AuthContext.Provider>
