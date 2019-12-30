@@ -1,4 +1,5 @@
 import { Fragment, useContext } from 'react';
+import { ThreeBars } from 'styled-icons/octicons/ThreeBars';
 import { AuthContext } from '../context/authContest';
 
 import {
@@ -40,7 +41,7 @@ const Nav = () => {
         </CollapsingDiv>
         <HiddenMenu>
           <NavIconButton type="button">
-            <i className="fa fa-bars"></i>
+            <ThreeBars size="34" />
           </NavIconButton>
         </HiddenMenu>
       </div>

@@ -63,9 +63,6 @@ export const NavButton = styled.button`
 `;
 
 export const NavIconButton = styled.button`
-  height: 35px;
-  font-size: 24px;
-  width: 30px;
   border: none;
   background: inherit;
   color: #ccc;
