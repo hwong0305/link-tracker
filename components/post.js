@@ -47,9 +47,23 @@ const Post = () => {
       });
   }, []);
   const addPost = () => {
-    console.log(token);
-    setTitle('');
-    setLink('');
+    fetch(`${API_URL}/posts`, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ title, link }),
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(postData => {
+        setData([...data, { Title: postData.title, Link: postData.link }]);
+        setTitle('');
+        setLink('');
+      });
   };
   return (
     <PostDiv>
