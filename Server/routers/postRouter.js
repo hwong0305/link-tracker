@@ -35,6 +35,9 @@ postRouter.get('/:id', async (req, res) => {
 postRouter.post('/', async (req, res) => {
   try {
     const { link, title } = req.body;
+    if (!link || !title) {
+      return res.status(400).send('Title or Link fiels are not filled out');
+    }
     const hash = encryptURL(link);
     const { id: UserId } = req.user;
     const post = await Post.create({ link: hash, title, UserId });
