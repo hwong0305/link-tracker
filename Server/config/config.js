@@ -5,4 +5,5 @@ export default {
   DB_USER: process.env.DB_USER || 'linktracker',
   DB_PW: process.env.DB_PW || 'linktracker',
   SECRET: process.env.SECRET || 'somesecretphrase',
+  ADMIN_KEY: process.env.ADMIN_KEY || '123',
 };

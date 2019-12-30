@@ -1,10 +1,12 @@
 import express from 'express';
 import db from '../db';
+import adminMiddleware from '../auth/admin';
 
 const { Post, User } = db;
 
 const adminRouter = express.Router();
 
+adminRouter.use(adminMiddleware);
 adminRouter.get('/users', async (req, res) => {
   try {
     const users = await User.findAll({ include: [{ all: true }] });
