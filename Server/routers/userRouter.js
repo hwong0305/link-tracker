@@ -2,8 +2,22 @@ import express from 'express';
 import { hashPassword, comparePassword } from '../auth/crypto';
 import db from '../db';
 
-const { User } = db;
+const { Post, User } = db;
 const userRouter = express.Router();
+
+userRouter.get('/:id/posts', async (req, res) => {
+  try {
+    const posts = await Post.findAll({
+      where: {
+        UserId: req.params.id,
+      },
+    });
+    res.json(posts);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Problem getting posts from user');
+  }
+});
 
 userRouter.post('/login', async (req, res) => {
   try {
