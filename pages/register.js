@@ -57,7 +57,14 @@ const Register = () => {
     <MainContainer>
       <Card>
         <FormTitle>Register</FormTitle>
-        <p style={{ color: 'red', marginLeft: '1rem', marginRight: '0.5rem' }}>
+        <p
+          style={{
+            color: 'red',
+            marginLeft: '1rem',
+            marginRight: '0.5rem',
+            fontSize: '1.6rem',
+          }}
+        >
           {err}
         </p>
         <Form onSubmit={registerUser}>
