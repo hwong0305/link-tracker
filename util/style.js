@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
   table th,
   table td {
     padding: 10px 20px;
+    min-width: 105px;
   }
   table td span {
     background: #eee;
@@ -51,6 +52,13 @@ export const GlobalStyle = createGlobalStyle`
   }
   table td .mobile {
     display: none;
+  }
+  .deleteButton{
+    color: red;
+    border: none;
+    background: inherit;
+    cursor: pointer;
+    font-size: 16px;
   }
   @media (max-width: 760px) {
     table {
@@ -72,7 +80,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 -1px -1px 0;
       padding-top: 35px;
       position: relative;
-      width: 50%;
+      width: 33.3%;
     }
     table td span {
       display: block;

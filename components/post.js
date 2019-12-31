@@ -20,7 +20,7 @@ const Post = () => {
   const [err, setErr] = useState('');
   const { user, token } = useContext(AuthContext);
   const formRef = useRef(null);
-  const headers = ['Title', 'Link'];
+  const headers = ['Title', 'Link', 'Actions'];
 
   const resetForm = () => {
     setTitle('');
@@ -33,6 +33,7 @@ const Post = () => {
       const managedPostData = pData.map(post => ({
         Title: post.title,
         Link: post.link,
+        Id: post.id,
       }));
       setData(managedPostData);
     });
@@ -45,11 +46,26 @@ const Post = () => {
         title,
         link,
       });
-      setData([...data, { Title: postData.title, Link: postData.link }]);
+      setData([
+        ...data,
+        { Title: postData.title, Link: postData.link, Id: postData.id },
+      ]);
       resetForm();
     } catch (err) {
       console.log(err);
       setErr('The Title and Post fields are required');
+    }
+  };
+
+  const removePost = async (id, index) => {
+    try {
+      await fetchAdapter(`/posts/${id}`, 'DELETE', token);
+      const newData = [...data];
+      newData.splice(index, 1);
+      setData(newData);
+    } catch (err) {
+      console.log(err);
+      alert('Error deleting post');
     }
   };
 
@@ -106,6 +122,19 @@ const Post = () => {
                         Link
                       </a>
                     </Fragment>
+                  )}
+                  {k === 'Id' && (
+                    <button
+                      type="button"
+                      className="deleteButton"
+                      onClick={() => {
+                        if (confirm('Are you sure you want to delete?')) {
+                          removePost(v, i);
+                        }
+                      }}
+                    >
+                      Delete
+                    </button>
                   )}
                 </td>
               ))}
