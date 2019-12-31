@@ -83,12 +83,12 @@ export const CollapsingDiv = styled.div`
 `;
 
 export const HiddenMenu = styled.div`
-  visibility: hidden;
+  display: none;
   width: 0;
   color: #ccc;
 
   @media (max-width: 700px) {
-    visibility: visible;
+    display: block;
     width: 50px;
   }
 `;

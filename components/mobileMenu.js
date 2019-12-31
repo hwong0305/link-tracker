@@ -14,10 +14,10 @@ const MobileModal = styled.div`
 
 const MobileMenuDiv = styled.div`
   position: absolute;
-  right: 0;
+  left: 0;
   top: 0;
-  height: 100vh;
-  width: 50vw;
+  height: 40vh;
+  width: 100vw;
   z-index: 125;
   background: #403c3c;
   color: #ddd;
@@ -25,13 +25,25 @@ const MobileMenuDiv = styled.div`
   display: flex;
   flex-direction: column;
 
+  h3 {
+    text-align: center;
+    font-family: 'Coda';
+  }
+
   a {
     text-decoration: none;
     color: #ddd;
     width: 100%;
     text-align: center;
-    height: 3rem;
-    padding-top: 1rem;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    height: 4em;
+    line-height: 2em;
+    font-size: 1.8rem;
+    border-top: solid 1px #ddd;
+  }
+
+  a:last-child {
     border-bottom: solid 1px #ddd;
   }
 
@@ -45,10 +57,12 @@ const MobileMenuDiv = styled.div`
     color: #ddd;
     width: 100%;
     text-align: center;
-    height: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    height: 4em;
+    font-size: 1.8rem;
     border: none;
-    font-size: 2rem;
-    line-height: 1em;
+    border-top: solid 1px #ddd;
     border-bottom: solid 1px #ddd;
     cursor: pointer;
   }
@@ -62,6 +76,7 @@ const MobileMenuDiv = styled.div`
 const MobileMenu = ({ click, loggedIn, logout }) => (
   <MobileModal onClick={click}>
     <MobileMenuDiv>
+      <h3>Link-Tracker</h3>
       {loggedIn ? (
         <button type="button" onClick={logout}>
           Logout

@@ -11,7 +11,7 @@ const MainPage = styled.div`
   justify-content: flex-start;
   top: 70px;
   left: 0;
-  height: 100%;
+  height: calc(100% - 70px);
   width: 100%;
   overflow: auto;
 `;
