@@ -63,4 +63,21 @@ postRouter.post(
   }
 );
 
+postRouter.delete('/:id', async (req, res) => {
+  try {
+    const post = await Post.findOne({ where: { id: req.params.id } });
+    if (!post) {
+      return res.json({ status: 'Failed', error: 'Invalid Post ID' });
+    }
+    await post.destroy();
+    res.json({
+      status: 'Success',
+      id: req.params.id,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error deleting a post');
+  }
+});
+
 export default postRouter;
