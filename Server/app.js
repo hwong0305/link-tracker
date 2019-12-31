@@ -1,15 +1,18 @@
 import express from 'express';
 import cors from 'cors';
+import cron from 'node-cron';
 import adminRouter from './routers/adminRouter';
 import userRouter from './routers/userRouter';
 import config from '../config/config';
-import { sequelize } from './db';
+import db, { sequelize } from './db';
 import postRouter from './routers/postRouter';
 import './helpers/passport';
 
 import isAuthenticated from './helpers/authentication';
 
+const ONE_MONTH = 60 * 60 * 24 * 7 * 30;
 const { CLIENT_URL, PORT } = config;
+const { Post } = db;
 
 const app = express();
 app.use(
@@ -27,6 +30,17 @@ app.get('/', (req, res) => {
 });
 
 sequelize.sync({ force: false }).then(() => {
+  cron.schedule('0 0 1 * *', () => {
+    console.log('---------------------');
+    console.log('Running Cron Job');
+    Post.destroy({
+      where: {
+        createdAt: {
+          $lte: Date.now() - ONE_MONTH,
+        },
+      },
+    });
+  });
   app.listen(PORT, () => {
     console.log(`Now listening on Port ${PORT}`);
   });
