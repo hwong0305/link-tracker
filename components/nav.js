@@ -18,10 +18,17 @@ const Nav = () => {
   const { loggedIn, changeLoggedIn, setUser, setToken } = useContext(
     AuthContext
   );
+  const logout = () => {
+    changeLoggedIn(false);
+    setUser('');
+    setToken('');
+  };
   return (
     <StyledNav>
       {toggle && (
         <MobileMenu
+          loggedIn={loggedIn}
+          logout={logout}
           click={() => {
             setToggle(!toggle);
           }}
@@ -37,15 +44,7 @@ const Nav = () => {
       >
         <CollapsingDiv>
           {loggedIn ? (
-            <NavButton
-              onClick={() => {
-                changeLoggedIn(false);
-                setUser('');
-                setToken('');
-              }}
-            >
-              Logout
-            </NavButton>
+            <NavButton onClick={logout}>Logout</NavButton>
           ) : (
             <Fragment>
               <NavLink href="/register" alt="Sign Up">

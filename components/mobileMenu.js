@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 
 const MobileModal = styled.div`
@@ -23,6 +24,7 @@ const MobileMenuDiv = styled.div`
   font-size: 20px;
   display: flex;
   flex-direction: column;
+
   a {
     text-decoration: none;
     color: #ddd;
@@ -37,18 +39,44 @@ const MobileMenuDiv = styled.div`
     background: #ddd;
     color: #222;
   }
+
+  button {
+    background: #403c3c;
+    color: #ddd;
+    width: 100%;
+    text-align: center;
+    height: 3rem;
+    border: none;
+    font-size: 20px;
+    line-height: 20px;
+    border-bottom: solid 1px #ddd;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #ddd;
+    color: #222;
+  }
 `;
 
-const MobileMenu = ({ click }) => {
+const MobileMenu = ({ click, loggedIn, logout }) => {
   return (
     <MobileModal onClick={click}>
       <MobileMenuDiv>
-        <Link href="/login">
-          <a>Login</a>
-        </Link>
-        <Link href="/register">
-          <a>Sign Up</a>
-        </Link>
+        {loggedIn ? (
+          <button type="button" onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <Fragment>
+            <Link href="/login">
+              <a>Login</a>
+            </Link>
+            <Link href="/register">
+              <a>Sign Up</a>
+            </Link>
+          </Fragment>
+        )}
       </MobileMenuDiv>
     </MobileModal>
   );

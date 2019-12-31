@@ -15,6 +15,7 @@ export const PostInput = styled.input`
 export const PostButton = styled.button`
   font-size: 0.8rem;
   width: 25%;
+  min-width: 60px;
   margin-top: 1rem;
   height: 3vh;
   background: #ddd;
