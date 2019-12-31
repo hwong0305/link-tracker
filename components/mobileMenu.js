@@ -59,27 +59,25 @@ const MobileMenuDiv = styled.div`
   }
 `;
 
-const MobileMenu = ({ click, loggedIn, logout }) => {
-  return (
-    <MobileModal onClick={click}>
-      <MobileMenuDiv>
-        {loggedIn ? (
-          <button type="button" onClick={logout}>
-            Logout
-          </button>
-        ) : (
-          <Fragment>
-            <Link href="/login">
-              <a>Login</a>
-            </Link>
-            <Link href="/register">
-              <a>Sign Up</a>
-            </Link>
-          </Fragment>
-        )}
-      </MobileMenuDiv>
-    </MobileModal>
-  );
-};
+const MobileMenu = ({ click, loggedIn, logout }) => (
+  <MobileModal onClick={click}>
+    <MobileMenuDiv>
+      {loggedIn ? (
+        <button type="button" onClick={logout}>
+          Logout
+        </button>
+      ) : (
+        <Fragment>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+          <Link href="/register">
+            <a>Sign Up</a>
+          </Link>
+        </Fragment>
+      )}
+    </MobileMenuDiv>
+  </MobileModal>
+);
 
 export default MobileMenu;

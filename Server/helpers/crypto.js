@@ -7,17 +7,12 @@ const SALT_ROUNDS = 12;
 const { AES } = CryptoJS;
 const { URL_SECRET } = config;
 
-export const hashPassword = password => {
-  return bcrypt.hash(password, SALT_ROUNDS);
-};
+export const hashPassword = password => bcrypt.hash(password, SALT_ROUNDS);
 
-export const comparePassword = (password, hash) => {
-  return bcrypt.compare(password, hash);
-};
+export const comparePassword = (password, hash) =>
+  bcrypt.compare(password, hash);
 
-export const encryptURL = url => {
-  return AES.encrypt(url, URL_SECRET).toString();
-};
+export const encryptURL = url => AES.encrypt(url, URL_SECRET).toString();
 
 export const decryptURL = hash => {
   const bytes = AES.decrypt(hash, URL_SECRET);

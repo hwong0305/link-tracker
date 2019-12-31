@@ -17,10 +17,6 @@ const postSchema = Joi.object({
   title: Joi.string().required(),
 });
 
-export const validateUser = userObj => {
-  return userSchema.validate(userObj);
-};
+export const validateUser = userObj => userSchema.validate(userObj);
 
-export const validatePost = postObj => {
-  return postSchema.validate(postObj);
-};
+export const validatePost = postObj => postSchema.validate(postObj);

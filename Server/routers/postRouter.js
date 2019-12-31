@@ -9,12 +9,10 @@ const postRouter = express.Router();
 postRouter.get('/', async (req, res) => {
   try {
     const posts = await Post.findAll();
-    const decryptedPosts = posts.map(post => {
-      return {
-        ...post.toJSON(),
-        link: decryptURL(post.link),
-      };
-    });
+    const decryptedPosts = posts.map(post => ({
+      ...post.toJSON(),
+      link: decryptURL(post.link),
+    }));
     res.json(decryptedPosts);
   } catch (err) {
     console.log(err);

@@ -30,9 +30,10 @@ const Post = () => {
 
   useEffect(() => {
     fetchAdapter('/users/posts', 'GET', token).then(pData => {
-      const managedPostData = pData.map(post => {
-        return { Title: post.title, Link: post.link };
-      });
+      const managedPostData = pData.map(post => ({
+        Title: post.title,
+        Link: post.link,
+      }));
       setData(managedPostData);
     });
   }, []);
@@ -84,36 +85,32 @@ const Post = () => {
       <table>
         <thead>
           <tr>
-            {headers.map((h, i) => {
-              return <th key={i}>{h}</th>;
-            })}
+            {headers.map((h, i) => (
+              <th key={i}>{h}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((it, i) => {
-            return (
-              <tr key={i}>
-                {Object.entries(it).map(([k, v]) => {
-                  return (
-                    <td key={k}>
-                      <span>{k}</span>
-                      {k === 'Title' && v}
-                      {k === 'Link' && (
-                        <Fragment>
-                          <a href={v} className="desktop">
-                            {v}
-                          </a>
-                          <a href={v} className="mobile">
-                            Link
-                          </a>
-                        </Fragment>
-                      )}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
+          {data.map((it, i) => (
+            <tr key={i}>
+              {Object.entries(it).map(([k, v]) => (
+                <td key={k}>
+                  <span>{k}</span>
+                  {k === 'Title' && v}
+                  {k === 'Link' && (
+                    <Fragment>
+                      <a href={v} className="desktop">
+                        {v}
+                      </a>
+                      <a href={v} className="mobile">
+                        Link
+                      </a>
+                    </Fragment>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </PostDiv>

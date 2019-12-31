@@ -5,6 +5,5 @@ const { SECRET } = config;
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
 
-export const signJwtToken = obj => {
-  return jwt.sign(obj, SECRET, { expiresIn: ONE_WEEK });
-};
+export const signJwtToken = obj =>
+  jwt.sign(obj, SECRET, { expiresIn: ONE_WEEK });

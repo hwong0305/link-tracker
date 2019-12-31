@@ -57,12 +57,7 @@ const Nav = () => {
           )}
         </CollapsingDiv>
         <HiddenMenu>
-          <NavIconButton
-            type="button"
-            onClick={() => {
-              return setToggle(!toggle);
-            }}
-          >
+          <NavIconButton type="button" onClick={() => setToggle(!toggle)}>
             <ThreeBars size="34" />
           </NavIconButton>
         </HiddenMenu>

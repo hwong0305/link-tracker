@@ -24,12 +24,10 @@ userRouter.get('/posts', isAuthenticated, async (req, res) => {
         UserId: req.user.id,
       },
     });
-    const decryptedPosts = posts.map(post => {
-      return {
-        ...post.toJSON(),
-        link: decryptURL(post.link),
-      };
-    });
+    const decryptedPosts = posts.map(post => ({
+      ...post.toJSON(),
+      link: decryptURL(post.link),
+    }));
     res.json(decryptedPosts);
   } catch (err) {
     console.log(err);

@@ -16,30 +16,15 @@ const MainPage = styled.div`
   overflow: auto;
 `;
 
-const NoSSRLanding = dynamic(
-  () => {
-    return import('../components/landing');
-  },
-  {
-    ssr: false,
-  }
-);
+const NoSSRLanding = dynamic(() => import('../components/landing'), {
+  ssr: false,
+});
 
-const NoSSRNav = dynamic(
-  () => {
-    return import('../components/nav');
-  },
-  {
-    ssr: false,
-  }
-);
+const NoSSRNav = dynamic(() => import('../components/nav'), {
+  ssr: false,
+});
 
-const NoSSRPost = dynamic(
-  () => {
-    return import('../components/post');
-  },
-  { ssr: false }
-);
+const NoSSRPost = dynamic(() => import('../components/post'), { ssr: false });
 
 const App = () => {
   const { loggedIn } = useContext(AuthContext);
