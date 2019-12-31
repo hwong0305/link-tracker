@@ -32,31 +32,31 @@ export const Form = styled.form`
 
 export const FormTitle = styled.h3`
   font-family: 'Coda', cursive;
-  font-size: 3rem;
-  line-height: 3rem;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  font-size: 3.6rem;
+  line-height: 1em;
+  margin-top: 1em;
+  margin-bottom: 0.1em;
 `;
 
 export const FormInput = styled.input`
-  height: 2.5rem;
-  font-size: 1.2rem;
+  height: 2.5em;
+  font-size: 1.6rem;
   width: 100%;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
   border: solid 1px #333;
-  border-radius: 0.2rem;
+  border-radius: 0.2em;
   background: #eee;
-  padding: 0.4rem;
+  padding: 0.8em;
 `;
 
 export const FormButton = styled.button`
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  height: 4vh;
+  font-size: 1.6rem;
+  margin-top: 1em;
+  height: 2em;
   background: #ddd;
   border: solid 1px #333;
-  border-radius: 0.2rem;
+  border-radius: 0.5em;
   cursor: pointer;
 
   &:hover {

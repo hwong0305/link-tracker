@@ -11,8 +11,8 @@ const PostDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
+  padding-bottom: 3em;
+  margin-bottom: 3em;
 `;
 
 const Post = () => {
@@ -73,7 +73,7 @@ const Post = () => {
 
   return (
     <PostDiv>
-      <h1 style={{ fontSize: '2rem' }}>Hello {user}!</h1>
+      <h1 style={{ fontSize: '3.6rem' }}>Hello {user}!</h1>
       <PostForm method="POST" ref={formRef} onSubmit={addPost}>
         <p style={{ color: 'red', fontSize: '1rem', lineHeight: '1rem' }}>
           {err}
@@ -114,7 +114,7 @@ const Post = () => {
           {data.map((it, i) => (
             <tr key={i}>
               {Object.entries(it).map(([k, v]) => (
-                <td key={k}>
+                <td key={k} className={k === 'Id' && 'del'}>
                   <span>{k}</span>
                   {k === 'Title' && v}
                   {k === 'Link' && (

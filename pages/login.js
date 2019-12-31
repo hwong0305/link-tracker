@@ -55,7 +55,14 @@ const Login = () => {
     <MainContainer>
       <Card>
         <FormTitle>Login</FormTitle>
-        <p style={{ color: 'red', marginLeft: '1rem', marginRight: '0.5rem' }}>
+        <p
+          style={{
+            color: 'red',
+            marginLeft: '1em',
+            marginRight: '0.5em',
+            fontSize: '1.6rem',
+          }}
+        >
           {err}
         </p>
         <Form onSubmit={loginUser}>
@@ -89,7 +96,8 @@ const Login = () => {
           <Link href="/register">
             <a
               style={{
-                fontSize: '0.9rem',
+                fontSize: '1.2rem',
+                marginTop: '0.8rem',
                 marginBottom: '1.5rem',
                 textDecoration: 'none',
                 textAlign: 'center',

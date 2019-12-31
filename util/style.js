@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
+    font-size: 62.5%;
     overflow: hidden;
   }
   * {
@@ -21,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     border-collapse: collapse;
     text-align: left;
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 3em;
   }
   table tr {
     border-bottom: 1px solid;
@@ -32,14 +33,15 @@ export const GlobalStyle = createGlobalStyle`
   table th,
   table td {
     padding: 10px 20px;
+    font-size: 1.4rem;
   }
   table td span {
     background: #eee;
     color: dimgrey;
     display: none;
-    font-size: 10px;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 5px;
+    padding: 0.5em;
     position: absolute;
     text-transform: uppercase;
     top: 0;
@@ -51,16 +53,22 @@ export const GlobalStyle = createGlobalStyle`
   table td .mobile {
     display: none;
   }
+  .del {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
   .deleteButton{
     color: red;
     border: none;
     background: inherit;
+    height: 2em;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.4rem;
   }
   @media (max-width: 760px) {
     table {
-      margin-bottom: 6rem;
+      margin-bottom: 6em;
     }
     table thead {
       left: -9999px;

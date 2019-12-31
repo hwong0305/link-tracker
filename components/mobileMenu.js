@@ -21,7 +21,7 @@ const MobileMenuDiv = styled.div`
   z-index: 125;
   background: #403c3c;
   color: #ddd;
-  font-size: 20px;
+  font-size: 2rem;
   display: flex;
   flex-direction: column;
 
@@ -45,10 +45,10 @@ const MobileMenuDiv = styled.div`
     color: #ddd;
     width: 100%;
     text-align: center;
-    height: 3rem;
+    height: 2em;
     border: none;
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 2rem;
+    line-height: 1em;
     border-bottom: solid 1px #ddd;
     cursor: pointer;
   }

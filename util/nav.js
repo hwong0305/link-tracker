@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Brand = styled.span`
-  font-size: 34px;
+  font-size: 3.4rem;
   margin-left: 2vw;
   font-family: 'Coda', cursive;
 `;
@@ -11,7 +11,7 @@ export const StyledNav = styled.nav`
   top: 0px;
   left: 0px;
   width: 100vw;
-  height: 70px;
+  height: 7rem;
   background: #403c3c;
   color: #ccc;
   box-sizing: border-box;
@@ -22,16 +22,16 @@ export const StyledNav = styled.nav`
 
 export const NavLink = styled.a`
   display: inline-block;
-  line-height: 35px;
-  height: 35px;
-  width: 90px;
+  line-height: 2.5em;
+  height: 2.5em;
+  width: 6em;
   color: #ccc;
   border: solid 1px #ccc;
   background: inherit;
   margin: 0 1vw 0 1vw;
   border-radius: 0.5vw;
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 700;
   text-decoration: none;
   text-align: center;
@@ -44,14 +44,14 @@ export const NavLink = styled.a`
   }
 `;
 export const NavButton = styled.button`
-  height: 35px;
-  width: 90px;
+  height: 2.5em;
+  width: 6em;
   color: #ccc;
   border: solid 1px #ccc;
   background: inherit;
   margin: 0 1vw 0 1vw;
   border-radius: 0.5vw;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 700;
   cursor: pointer;
   padding: 0;
