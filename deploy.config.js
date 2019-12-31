@@ -1,8 +1,8 @@
 module.exports = {
   apps: {
-    name: 'link.hireme.fun',
+    name: 'link.freedomains.dev',
     script:
-      'npm run start:myproxy << /home/myproxy/.pm2/logs/link.hireme.fun-out.log',
+      'npm run start:myproxy << /home/myproxy/.pm2/logs/link.freedomains.dev-out.log',
     instances: 1,
     autorestart: true,
     watch: false,
@@ -13,10 +13,8 @@ module.exports = {
       ADMIN: 'A3uPmSvEs5H7FfgmjCUsqD3vsshwuRMwezneqXdA',
       WORKPATH: '/home/myproxy',
       API_URL: 'https://linksrv.hireme.fun',
-      SECRET: 'hard3rc0d3r',
-      ADMIN_KEY: 'hard3rc0d3r',
     },
-    error_file: '/home/myproxy/.pm2/logs/link.hireme.fun-err.log',
+    error_file: '/home/myproxy/.pm2/logs/link.freedomains.dev-err.log',
     merge_logs: true,
   },
 };
