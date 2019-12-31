@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PostInput = styled.input`
   height: 2rem;
   font-size: 0.8rem;
-  width: 70%;
+  width: 50%;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   border: solid 1px #333;
@@ -31,7 +31,7 @@ export const PostButton = styled.button`
   }
 `;
 
-export const PostForm = styled.div`
+export const PostForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

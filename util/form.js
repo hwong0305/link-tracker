@@ -15,6 +15,7 @@ export const MainContainer = styled.div`
 export const Card = styled.div`
   display: flex;
   width: 35vw;
+  min-width: 375px;
   background: #ddd;
   justify-content: space-evenly;
   align-items: center;
@@ -22,7 +23,7 @@ export const Card = styled.div`
   border-radius: 1vw;
 `;
 
-export const Form = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   width: 70%;

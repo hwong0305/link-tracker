@@ -18,7 +18,20 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
   const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
-  const registerUser = async () => {
+  const registerUser = async e => {
+    e.preventDefault();
+    if (!username.match(/[a-zA-Z0-9]{4}/)) {
+      setErr(
+        'Username be longer than 4 characters. No special characters can be used'
+      );
+      return;
+    }
+    if (!password.match(/^.[^\s]{6,24}/)) {
+      setErr(
+        'Password must be between 6 and 32 characters long with no whitespace.'
+      );
+      return;
+    }
     const userRes = await fetch(`${API_URL}/users/register`, {
       method: 'POST',
       headers: {
@@ -30,7 +43,7 @@ const Register = () => {
 
     if (!userRes.ok) {
       setErr(
-        'User already exists or registration information is incorrect. Please only use alphanumeric characters and password is between 6 and 24 characters'
+        'User already exists or registration information is incorrect. Password must be between 6 and 24 characters'
       );
     } else {
       const { token } = await userRes.json();
@@ -47,10 +60,12 @@ const Register = () => {
         <p style={{ color: 'red', marginLeft: '1rem', marginRight: '0.5rem' }}>
           {err}
         </p>
-        <Form>
+        <Form onSubmit={registerUser}>
           <FormInput
             type="text"
             name="username"
+            title="Username must be at least 4 character.Only underscore special char is allowed"
+            required
             placeholder="Username"
             value={username}
             onChange={e => {
@@ -60,17 +75,14 @@ const Register = () => {
           <FormInput
             type="password"
             name="password"
+            required
             placeholder="Password"
             value={password}
             onChange={e => {
               setPassword(e.target.value);
             }}
           ></FormInput>
-          <FormButton
-            type="button"
-            style={{ marginBottom: '2.5rem' }}
-            onClick={registerUser}
-          >
+          <FormButton type="submit" style={{ marginBottom: '2.5rem' }}>
             Register
           </FormButton>
         </Form>

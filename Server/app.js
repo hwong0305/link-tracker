@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Now listening on Port ${PORT}`);
   });

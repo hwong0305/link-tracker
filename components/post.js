@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import config from '../config/config';
 import { AuthContext } from '../context/authContext';
@@ -7,7 +7,7 @@ import { PostForm, PostInput, PostButton } from '../util/postForm';
 const { API_URL } = config;
 
 const PostDiv = styled.div`
-  width: 70%;
+  width: 50%;
   height: 100%;
   display: flex;
   justify-content: flex-start;
@@ -21,9 +21,8 @@ const Post = () => {
   const [data, setData] = useState([]);
   const [err, setErr] = useState('');
   const { user, token } = useContext(AuthContext);
-
+  const formRef = useRef(null);
   const headers = ['Title', 'Link'];
-
   useEffect(() => {
     fetch(`${API_URL}/users/posts`, {
       mode: 'cors',
@@ -47,7 +46,9 @@ const Post = () => {
         );
       });
   }, []);
-  const addPost = () => {
+
+  const addPost = e => {
+    e.preventDefault();
     fetch(`${API_URL}/posts`, {
       method: 'POST',
       mode: 'cors',
@@ -64,6 +65,7 @@ const Post = () => {
         setData([...data, { Title: postData.title, Link: postData.link }]);
         setTitle('');
         setLink('');
+        formRef.current.reset();
       })
       .catch(err => {
         console.log(err);
@@ -73,11 +75,15 @@ const Post = () => {
   return (
     <PostDiv>
       <h1 style={{ fontSize: '2rem' }}>Hello {user}!</h1>
-      <PostForm>
+      <PostForm method="POST" ref={formRef} onSubmit={addPost}>
+        <p style={{ color: 'red', fontSize: '1rem', lineHeight: '1rem' }}>
+          {err}
+        </p>
         <PostInput
           type="text"
           name="title"
           placeholder="Title"
+          required
           value={title}
           onChange={e => {
             setTitle(e.target.value);
@@ -87,15 +93,13 @@ const Post = () => {
           type="text"
           name="link"
           placeholder="Link"
+          required
           value={link}
           onChange={e => {
             setLink(e.target.value);
           }}
         ></PostInput>
-        <PostButton type="button" onClick={addPost}>
-          Create
-        </PostButton>
-        <p style={{ color: 'red' }}>{err}</p>
+        <PostButton type="submit">Create</PostButton>
       </PostForm>
       <table>
         <thead>

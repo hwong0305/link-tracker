@@ -19,7 +19,20 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
   const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
-  const loginUser = async () => {
+  const loginUser = async e => {
+    e.preventDefault();
+    if (!username.match(/[a-zA-Z0-9]{4}/)) {
+      setErr(
+        'Username be longer than 4 characters. No special characters can be used'
+      );
+      return;
+    }
+    if (!password.match(/^.[^\s]{6,24}/)) {
+      setErr(
+        'Password must be between 6 and 32 characters long with no whitespace.'
+      );
+      return;
+    }
     const userRes = await fetch(`${API_URL}/users/login`, {
       method: 'POST',
       headers: {
@@ -45,11 +58,12 @@ const Login = () => {
         <p style={{ color: 'red', marginLeft: '1rem', marginRight: '0.5rem' }}>
           {err}
         </p>
-        <Form>
+        <Form onSubmit={loginUser}>
           <FormInput
             type="text"
             name="username"
             placeholder="Username"
+            required
             value={username}
             onChange={e => {
               setUserName(e.target.value);
@@ -59,16 +73,13 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Password"
+            required
             value={password}
             onChange={e => {
               setPassword(e.target.value);
             }}
           ></FormInput>
-          <FormButton
-            type="button"
-            style={{ marginBottom: '1rem' }}
-            onClick={loginUser}
-          >
+          <FormButton type="submit" style={{ marginBottom: '1rem' }}>
             Login
           </FormButton>
           <Link href="/register">
