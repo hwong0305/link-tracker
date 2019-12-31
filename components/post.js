@@ -5,12 +5,14 @@ import { PostForm, PostInput, PostButton } from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
 
 const PostDiv = styled.div`
-  width: 50%;
+  width: 70%;
   height: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
 `;
 
 const Post = () => {

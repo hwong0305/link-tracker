@@ -22,7 +22,6 @@ export const GlobalStyle = createGlobalStyle`
     text-align: left;
     width: 100%;
     margin-top: 3rem;
-    margin-bottom: 4rem;
   }
   table tr {
     border-bottom: 1px solid;
@@ -33,7 +32,6 @@ export const GlobalStyle = createGlobalStyle`
   table th,
   table td {
     padding: 10px 20px;
-    min-width: 105px;
   }
   table td span {
     background: #eee;
@@ -73,7 +71,6 @@ export const GlobalStyle = createGlobalStyle`
       border-bottom: 0;
       display: flex;
       flex-direction: row;
-      flex-wrap: wrap;
     }
     table td {
       border: 1px solid;

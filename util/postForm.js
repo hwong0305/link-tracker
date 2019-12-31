@@ -18,6 +18,7 @@ export const PostButton = styled.button`
   min-width: 60px;
   margin-top: 1rem;
   height: 3vh;
+  min-height: 25px;
   background: #ddd;
   border: solid 1px #333;
   border-radius: 0.2rem;
