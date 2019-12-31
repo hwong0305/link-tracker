@@ -82,7 +82,11 @@ const Register = () => {
               setPassword(e.target.value);
             }}
           ></FormInput>
-          <FormButton type="submit" style={{ marginBottom: '2.5rem' }}>
+          <FormButton
+            type="submit"
+            aria-label="Register"
+            style={{ marginBottom: '2.5rem' }}
+          >
             Register
           </FormButton>
         </Form>

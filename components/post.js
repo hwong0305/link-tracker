@@ -98,7 +98,9 @@ const Post = () => {
             setLink(e.target.value);
           }}
         ></PostInput>
-        <PostButton type="submit">Create</PostButton>
+        <PostButton aria-label="Create Post" type="submit">
+          Create
+        </PostButton>
       </PostForm>
       <table>
         <thead>
@@ -129,6 +131,7 @@ const Post = () => {
                     <button
                       type="button"
                       className="deleteButton"
+                      aria-label="Delete Post"
                       onClick={() => {
                         if (confirm('Are you sure you want to delete?')) {
                           removePost(v, i);

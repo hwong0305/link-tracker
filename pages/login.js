@@ -79,7 +79,11 @@ const Login = () => {
               setPassword(e.target.value);
             }}
           ></FormInput>
-          <FormButton type="submit" style={{ marginBottom: '1rem' }}>
+          <FormButton
+            type="submit"
+            aria-label="login"
+            style={{ marginBottom: '1rem' }}
+          >
             Login
           </FormButton>
           <Link href="/register">
