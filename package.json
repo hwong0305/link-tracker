@@ -28,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "next": "latest",
+    "node-cron": "^2.0.3",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "prettier": "^1.19.1",
