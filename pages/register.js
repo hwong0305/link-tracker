@@ -64,7 +64,7 @@ const Register = () => {
           <FormInput
             type="text"
             name="username"
-            title="Username must be at least 4 character.Only underscore special char is allowed"
+            title="Username must be at least 4 character. Only underscore special char is allowed"
             required
             placeholder="Username"
             value={username}

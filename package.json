@@ -9,6 +9,7 @@
     "server": "nodemon -r esm Server/app.js"
   },
   "dependencies": {
+    "@hapi/joi": "^16.1.8",
     "babel-eslint": "^9.0.0",
     "bcrypt": "^3.0.7",
     "cors": "^2.8.5",

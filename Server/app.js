@@ -5,9 +5,9 @@ import userRouter from './routers/userRouter';
 import config from '../config/config';
 import { sequelize } from './db';
 import postRouter from './routers/postRouter';
-import './auth/passport';
+import './helpers/passport';
 
-import isAuthenticated from './auth/authentication';
+import isAuthenticated from './helpers/authentication';
 
 const { PORT } = config;
 

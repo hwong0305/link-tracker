@@ -1,11 +1,21 @@
 import express from 'express';
-import { hashPassword, comparePassword, decryptURL } from '../auth/crypto';
+import { hashPassword, comparePassword, decryptURL } from '../helpers/crypto';
 import db from '../db';
-import { signJwtToken } from '../auth/jwt';
-import isAuthenticated from '../auth/authentication';
+import { signJwtToken } from '../helpers/jwt';
+import isAuthenticated from '../helpers/authentication';
+import { validateUser } from '../helpers/validation';
 
 const { Post, User } = db;
 const userRouter = express.Router();
+
+const validUser = (req, res, next) => {
+  const { username, password } = req.body;
+  const { error } = validateUser({ username, password });
+  if (error) {
+    return res.status(400).send('Error with user information');
+  }
+  next();
+};
 
 userRouter.get('/posts', isAuthenticated, async (req, res) => {
   try {
@@ -27,7 +37,7 @@ userRouter.get('/posts', isAuthenticated, async (req, res) => {
   }
 });
 
-userRouter.post('/login', async (req, res) => {
+userRouter.post('/login', validUser, async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ where: { username } });
@@ -49,7 +59,7 @@ userRouter.post('/login', async (req, res) => {
   }
 });
 
-userRouter.post('/register', async (req, res) => {
+userRouter.post('/register', validUser, async (req, res) => {
   try {
     const { username, password } = req.body;
     const existingUser = await User.findOne({ where: { username } });

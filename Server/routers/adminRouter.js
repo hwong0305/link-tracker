@@ -1,6 +1,6 @@
 import express from 'express';
 import db from '../db';
-import adminMiddleware from '../auth/admin';
+import adminMiddleware from '../helpers/admin';
 
 const { Post, User } = db;
 
