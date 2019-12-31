@@ -1,10 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import config from '../config/config';
 import { AuthContext } from '../context/authContext';
 import { PostForm, PostInput, PostButton } from '../util/postForm';
-
-const { API_URL } = config;
+import fetchAdapter from '../helpers/fetchAdapter';
 
 const PostDiv = styled.div`
   width: 50%;
@@ -23,55 +21,37 @@ const Post = () => {
   const { user, token } = useContext(AuthContext);
   const formRef = useRef(null);
   const headers = ['Title', 'Link'];
+
+  const resetForm = () => {
+    setTitle('');
+    setLink('');
+    formRef.current.reset();
+  };
+
   useEffect(() => {
-    fetch(`${API_URL}/users/posts`, {
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(res => {
-        if (!res.ok) {
-          alert('error');
-        } else {
-          return res.json();
-        }
-      })
-      .then(pData => {
-        setData(
-          pData.map(post => {
-            return { Title: post.title, Link: post.link };
-          })
-        );
+    fetchAdapter('/users/posts', 'GET', token).then(pData => {
+      const managedPostData = pData.map(post => {
+        return { Title: post.title, Link: post.link };
       });
+      setData(managedPostData);
+    });
   }, []);
 
-  const addPost = e => {
+  const addPost = async e => {
     e.preventDefault();
-    fetch(`${API_URL}/posts`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ title, link }),
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(postData => {
-        setData([...data, { Title: postData.title, Link: postData.link }]);
-        setTitle('');
-        setLink('');
-        formRef.current.reset();
-      })
-      .catch(err => {
-        console.log(err);
-        setErr('The Title and Post fields are required');
+    try {
+      const postData = await fetchAdapter('/posts', 'POST', token, {
+        title,
+        link,
       });
+      setData([...data, { Title: postData.title, Link: postData.link }]);
+      resetForm();
+    } catch (err) {
+      console.log(err);
+      setErr('The Title and Post fields are required');
+    }
   };
+
   return (
     <PostDiv>
       <h1 style={{ fontSize: '2rem' }}>Hello {user}!</h1>
@@ -117,17 +97,16 @@ const Post = () => {
                   return (
                     <td key={k}>
                       <span>{k}</span>
-                      {k === 'Link' ? (
+                      {k === 'Title' && v}
+                      {k === 'Link' && (
                         <Fragment>
-                          <a href={v} className="desktop__table__link">
+                          <a href={v} className="desktop">
                             {v}
                           </a>
-                          <a className="mobile__link" href={v}>
+                          <a href={v} className="mobile">
                             Link
                           </a>
                         </Fragment>
-                      ) : (
-                        v
                       )}
                     </td>
                   );

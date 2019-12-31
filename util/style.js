@@ -49,7 +49,7 @@ export const GlobalStyle = createGlobalStyle`
   tbody tr:hover {
     background: #eee;
   }
-  table td .mobile__link {
+  table td .mobile {
     display: none;
   }
   @media (max-width: 760px) {
@@ -77,13 +77,11 @@ export const GlobalStyle = createGlobalStyle`
     table td span {
       display: block;
     }
-  }
-  @media (max-width: 550px) {
-    table td .desktop__table__link {
+    table td .desktop {
       display: none;
     }
 
-    table td .mobile__link {
+    table td .mobile {
      display: inline-block;
     }
   }
