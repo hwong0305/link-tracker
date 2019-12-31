@@ -19,7 +19,7 @@ app.use(
 );
 app.use(express.json()); // This replaces body-parser
 
-app.use('/admin', isAuthenticated, adminRouter);
+app.use('/admin', adminRouter);
 app.use('/posts', isAuthenticated, postRouter);
 app.use('/users', userRouter);
 app.get('/', (req, res) => {
