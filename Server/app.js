@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 sequelize.sync({ force: false }).then(() => {
-  cron.schedule('* * * * *', () => {
+  cron.schedule('0 0 * * 0-6', () => {
     console.log('---------------------');
     console.log('Running Cron Job');
     Post.destroy({
