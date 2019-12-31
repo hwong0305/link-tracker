@@ -9,10 +9,14 @@ import './helpers/passport';
 
 import isAuthenticated from './helpers/authentication';
 
-const { PORT } = config;
+const { CLIENT_URL, PORT } = config;
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: CLIENT_URL,
+  })
+);
 app.use(express.json()); // This replaces body-parser
 
 app.use('/admin', isAuthenticated, adminRouter);
