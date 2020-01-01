@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 import config from '../config/config';
 import { AuthContext } from '../context/authContext';
 import {
@@ -92,10 +93,24 @@ const Register = () => {
           <FormButton
             type="submit"
             aria-label="Register"
-            style={{ marginBottom: '2.5rem' }}
+            style={{ marginBottom: '1rem' }}
           >
             Register
           </FormButton>
+          <Link href="/login">
+            <a
+              style={{
+                fontSize: '1.2rem',
+                marginTop: '0.8rem',
+                marginBottom: '1.5rem',
+                textDecoration: 'none',
+                textAlign: 'center',
+                color: '#999',
+              }}
+            >
+              Already have an acoount?
+            </a>
+          </Link>
         </Form>
       </Card>
     </MainContainer>
