@@ -58,8 +58,8 @@ const Login = () => {
         <p
           style={{
             color: 'red',
-            marginLeft: '1em',
-            marginRight: '0.5em',
+            marginLeft: '1.5em',
+            marginRight: '1em',
             fontSize: '1.6rem',
           }}
         >
