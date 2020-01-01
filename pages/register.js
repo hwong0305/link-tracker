@@ -61,8 +61,8 @@ const Register = () => {
         <p
           style={{
             color: 'red',
-            marginLeft: '1rem',
-            marginRight: '0.5rem',
+            marginLeft: '1.5em',
+            marginRight: '1em',
             fontSize: '1.6rem',
           }}
         >
