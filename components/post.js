@@ -5,7 +5,7 @@ import { PostForm, PostInput, PostButton } from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
 
 const PostDiv = styled.div`
-  width: 70%;
+  width: 90%;
   height: 100%;
   display: flex;
   justify-content: flex-start;
@@ -114,7 +114,7 @@ const Post = () => {
           {data.map((it, i) => (
             <tr key={i}>
               {Object.entries(it).map(([k, v]) => (
-                <td key={k} className={k === 'Id' && 'del'}>
+                <td key={k} className={k === 'Id' ? 'del' : ''}>
                   <span>{k}</span>
                   {k === 'Title' && v}
                   {k === 'Link' && (

@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-size: 62.5%;
+    overflow-x: hidden;
   }
   * {
     box-sizing: border-box;
@@ -54,16 +55,17 @@ export const GlobalStyle = createGlobalStyle`
   }
   .del {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
   }
   .deleteButton{
     color: red;
     border: none;
     background: inherit;
-    height: 2em;
+    padding: 0;
+    height: 1.4rem;
     cursor: pointer;
+    line-height: 1.4rem;
     font-size: 1.4rem;
+    text-align:left;
   }
   @media (max-width: 760px) {
     table {
