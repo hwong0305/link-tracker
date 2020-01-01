@@ -14,7 +14,6 @@ export const StyledNav = styled.nav`
   height: 7rem;
   background: #403c3c;
   color: #ccc;
-  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,6 +66,7 @@ export const NavIconButton = styled.button`
   background: inherit;
   color: #ccc;
   cursor: pointer;
+  padding: 0;
 
   &:hover {
     color: #ddd;
@@ -86,9 +86,9 @@ export const HiddenMenu = styled.div`
   display: none;
   width: 0;
   color: #ccc;
+  width: 40px;
 
   @media (max-width: 700px) {
     display: block;
-    width: 50px;
   }
 `;

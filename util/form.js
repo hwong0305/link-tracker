@@ -14,8 +14,7 @@ export const MainContainer = styled.div`
 
 export const Card = styled.div`
   display: flex;
-  width: 35vw;
-  min-width: 375px;
+  width: 375px;
   background: #ddd;
   justify-content: space-evenly;
   align-items: center;

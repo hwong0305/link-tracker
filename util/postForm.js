@@ -38,4 +38,5 @@ export const PostForm = styled.form`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 780px;
 `;
