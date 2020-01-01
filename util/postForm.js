@@ -39,4 +39,5 @@ export const PostForm = styled.form`
   align-items: center;
   width: 100%;
   max-width: 780px;
+  margin-bottom: 3em;
 `;
