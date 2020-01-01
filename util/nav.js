@@ -67,7 +67,6 @@ export const NavIconButton = styled.button`
   color: #ccc;
   cursor: pointer;
   padding: 0;
-
   &:hover {
     color: #ddd;
   }
@@ -84,9 +83,9 @@ export const CollapsingDiv = styled.div`
 
 export const HiddenMenu = styled.div`
   display: none;
-  width: 0;
   color: #ccc;
   width: 40px;
+  margin-right: 3em;
 
   @media (max-width: 700px) {
     display: block;
