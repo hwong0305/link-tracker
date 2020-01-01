@@ -4,8 +4,8 @@
   "scripts": {
     "autofix": "eslint . --fix",
     "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "prestart:myproxy": "next build",
+    "start:myproxy": "next start -p 3024",
     "server": "nodemon -r esm Server/app.js"
   },
   "dependencies": {
