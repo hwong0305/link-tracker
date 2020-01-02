@@ -11,7 +11,6 @@ import './helpers/passport';
 
 import isAuthenticated from './helpers/authentication';
 
-const ONE_MONTH = 60 * 60 * 24 * 7 * 30;
 const { CLIENT_URL, PORT } = config;
 const { Post } = db;
 const { Op } = Sequelize;
@@ -27,7 +26,7 @@ app.use(express.json()); // This replaces body-parser
 app.use('/admin', adminRouter);
 app.use('/posts', isAuthenticated, postRouter);
 app.use('/users', userRouter);
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.send('Hello World');
 });
 
@@ -37,8 +36,8 @@ sequelize.sync({ force: false }).then(() => {
     console.log('Running Cron Job');
     Post.destroy({
       where: {
-        createdAt: {
-          [Op.lt]: new Date(Date.now() - ONE_MONTH),
+        expiration: {
+          [Op.lt]: new Date(),
         },
       },
     })

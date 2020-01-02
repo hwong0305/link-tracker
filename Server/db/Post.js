@@ -14,8 +14,8 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     expiration: {
-      type: DataTypes.INTEGER,
-      defaultValue: 30,
+      type: DataTypes.DATE,
+      defaultValue: new Date(new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)),
     },
   });
 
