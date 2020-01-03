@@ -1,3 +1,5 @@
+const ONE_WEEK = 1000 * 60 * 60 * 24 * 7 * 4;
+
 export default (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
     id: {
@@ -15,7 +17,11 @@ export default (sequelize, DataTypes) => {
     },
     expiration: {
       type: DataTypes.DATE,
-      defaultValue: new Date(new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)),
+      defaultValue: new Date(new Date(Date.now() + ONE_WEEK)),
+    },
+    shared: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   });
 

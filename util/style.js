@@ -57,7 +57,7 @@ export const GlobalStyle = createGlobalStyle`
     display: flex;
   }
   .deleteButton{
-    color: red;
+    color: rgba(255, 50, 50, 0.7);
     border: none;
     background: inherit;
     padding: 0;

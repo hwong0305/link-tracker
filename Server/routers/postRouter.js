@@ -78,4 +78,21 @@ postRouter.delete('/:id', async (req, res) => {
   }
 });
 
+postRouter.put('/:id', async (req, res) => {
+  try {
+    const post = await Post.findOne({ where: { id: req.params.id } });
+    if (!post) {
+      return res.status(400).send('Post does not exist');
+    }
+    const { shared } = req.body;
+    post.shared = shared;
+    post.save().then(() => {
+      res.json(post);
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error updating a post');
+  }
+});
+
 export default postRouter;

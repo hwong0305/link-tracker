@@ -1,8 +1,19 @@
 import { Fragment, useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { Delete } from 'styled-icons/material/Delete';
+import { ShareForward } from 'styled-icons/remix-fill/ShareForward';
+import config from '../config/config';
 import { AuthContext } from '../context/authContext';
-import { PostForm, PostInput, PostButton } from '../util/postForm';
+import {
+  Checkbox,
+  PostForm,
+  PostInput,
+  PostButton,
+  Switch,
+} from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
+
+const { CLIENT_URL } = config;
 
 const PostDiv = styled.div`
   width: 90%;
@@ -14,7 +25,6 @@ const PostDiv = styled.div`
   padding-bottom: 3em;
   margin-bottom: 3em;
 `;
-
 const Post = () => {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
@@ -22,7 +32,7 @@ const Post = () => {
   const [err, setErr] = useState('');
   const { user, token } = useContext(AuthContext);
   const formRef = useRef(null);
-  const headers = ['Title', 'Link', 'Actions'];
+  const headers = ['Title', 'Link', 'Delete/Deploy'];
 
   const resetForm = () => {
     setTitle('');
@@ -98,6 +108,12 @@ const Post = () => {
             setLink(e.target.value);
           }}
         ></PostInput>
+        <select>
+          <option value="1">1 Day</option>
+          <option value="7">1 Week</option>
+          <option value="14">2 Weeks</option>
+          <option value="30">1 Month</option>
+        </select>
         <PostButton aria-label="Create Post" type="submit">
           Create
         </PostButton>
@@ -115,10 +131,15 @@ const Post = () => {
             <tr key={i}>
               {Object.entries(it).map(([k, v]) => (
                 <td key={k} className={k === 'Id' ? 'del' : ''}>
-                  <span>{k}</span>
-                  {k === 'Title' && v}
+                  {k === 'Title' && (
+                    <Fragment>
+                      <span>{k}</span>
+                      {v}
+                    </Fragment>
+                  )}
                   {k === 'Link' && (
                     <Fragment>
+                      <span>{k}</span>
                       <a href={v} className="desktop">
                         {v}
                       </a>
@@ -128,18 +149,34 @@ const Post = () => {
                     </Fragment>
                   )}
                   {k === 'Id' && (
-                    <button
-                      type="button"
-                      className="deleteButton"
-                      aria-label="Delete Post"
-                      onClick={() => {
-                        if (confirm('Are you sure you want to delete?')) {
-                          removePost(v, i);
-                        }
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <Fragment>
+                      <span>Delete / Deploy</span>
+                      <button
+                        type="button"
+                        className="deleteButton"
+                        aria-label="Delete Post"
+                        onClick={() => {
+                          if (confirm('Are you sure you want to delete?')) {
+                            removePost(v, i);
+                          }
+                        }}
+                      >
+                        <Delete size={20} />
+                      </button>
+                      <Checkbox
+                        type="checkbox"
+                        id={v}
+                        className="checkbox"
+                      ></Checkbox>
+                      <Switch htmlFor={v} className="switch"></Switch>
+                      <a
+                        href={`${CLIENT_URL}/posts/${v}`}
+                        className="share"
+                        style={{ marginLeft: '0.3em' }}
+                      >
+                        <ShareForward size={20}></ShareForward>
+                      </a>
+                    </Fragment>
                   )}
                 </td>
               ))}
