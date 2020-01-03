@@ -1,7 +1,7 @@
 import { Fragment, useContext, useState } from 'react';
 import { ThreeBars } from 'styled-icons/octicons/ThreeBars';
 import { AuthContext } from '../context/authContext';
-import MobileMenu from './mobileMenu';
+import MobileMenu from './subcomponents/mobileMenu';
 
 import {
   Brand,

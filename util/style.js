@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   table td {
     padding: 10px 20px;
     font-size: 1.4rem;
+    min-height: 42px;
   }
   table td span {
     background: #eee;
