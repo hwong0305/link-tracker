@@ -86,12 +86,15 @@ const Post = () => {
             setLink(e.target.value);
           }}
         ></PostInput>
-        <select>
-          <option value="1">1 Day</option>
-          <option value="7">1 Week</option>
-          <option value="14">2 Weeks</option>
-          <option value="30">1 Month</option>
-        </select>
+        <label htmlFor="expiration" className="postFormLabel">
+          Expiration
+          <select id="expiration">
+            <option value="1">1 Day</option>
+            <option value="7">1 Week</option>
+            <option value="14">2 Weeks</option>
+            <option value="30">1 Month</option>
+          </select>
+        </label>
         <PostButton aria-label="Create Post" type="submit">
           Create
         </PostButton>

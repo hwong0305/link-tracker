@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   table td .mobile {
     display: none;
   }
-  .del {
+  td.del {
     display: flex;
   }
   .deleteButton{
@@ -67,6 +67,16 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 1.4rem;
     font-size: 1.4rem;
     text-align:left;
+  }
+  .postFormLabel{
+    font-size: 1.4rem;
+    select {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      margin-left: 1em;
+      font-size: 1.4rem;
+      width: 100px;
+    }
   }
   @media (max-width: 760px) {
     table {
@@ -95,7 +105,6 @@ export const GlobalStyle = createGlobalStyle`
     table td .desktop {
       display: none;
     }
-
     table td .mobile {
      display: inline-block;
     }

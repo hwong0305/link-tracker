@@ -84,7 +84,7 @@ const Table = ({ headers, token }) => {
                     ></Checkbox>
                     <Switch htmlFor={v} className="switch"></Switch>
                     <a
-                      href={`${CLIENT_URL}/posts/${v}`}
+                      href={`${CLIENT_URL}/post/${v}`}
                       className="share"
                       style={{ marginLeft: '0.3em' }}
                     >
