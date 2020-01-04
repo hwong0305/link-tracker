@@ -35,8 +35,6 @@ postRouter.post(
   '/',
   (req, res, next) => {
     const { link, title } = req.body;
-    console.log('link', link);
-    console.log('title', title);
     const { error } = validatePost({ link, title });
     if (error) {
       return res.status(400).send('Post information is not valid');

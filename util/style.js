@@ -54,7 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   table td .mobile {
     display: none;
   }
-  td.del {
+  td.actions {
     display: flex;
   }
   .deleteButton{

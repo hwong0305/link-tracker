@@ -54,6 +54,13 @@ export const Switch = styled.label`
   transition: 0.4s;
   --webkit-transition: 0.4s;
 
+  a {
+    position: absolute;
+    transition: opacity 0.4s;
+    --webkit-transition: opacity 0.4s;
+    opacity: 1;
+  }
+
   &::after {
     display: inline-block;
     position: absolute;
@@ -70,12 +77,17 @@ export const Switch = styled.label`
     left: 34px;
   }
 
-  input:checked + & {
+  input:checked:not(:disabled) + & {
     background: rgba(34, 139, 34, 0.8);
   }
 
   input:not(:checked) ~ & ~ a {
     display: none;
+  }
+
+  input:disabled + & {
+    background: #efefef;
+    cursor: auto;
   }
 `;
 

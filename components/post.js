@@ -1,9 +1,10 @@
-import { useContext, useRef, useEffect, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../context/authContext';
 import { PostForm, PostInput, PostButton } from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
-import Table from './subcomponents/Table';
+import Table from './subcomponents/postTable';
+import { useData } from '../helpers/dataHook';
 
 const PostDiv = styled.div`
   width: 90%;
@@ -15,13 +16,15 @@ const PostDiv = styled.div`
   padding-bottom: 3em;
   margin-bottom: 3em;
 `;
+
 const Post = () => {
+  const { user, token } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
   const [err, setErr] = useState('');
-  const [data, setData] = useState('');
-  const { user, token } = useContext(AuthContext);
+  const [data, setData] = useData(token);
   const formRef = useRef(null);
+  const selectRef = useRef(null);
   const headers = ['Title', 'Link', 'Delete/Deploy'];
 
   const resetForm = () => {
@@ -30,23 +33,13 @@ const Post = () => {
     formRef.current.reset();
   };
 
-  useEffect(() => {
-    fetchAdapter('/users/posts', 'GET', token).then(pData => {
-      const managedPostData = pData.map(post => ({
-        Title: post.title,
-        Link: post.link,
-        Id: post.id,
-      }));
-      setData(managedPostData);
-    });
-  }, []);
-
   const addPost = async e => {
     e.preventDefault();
     try {
       const postData = await fetchAdapter('/posts', 'POST', token, {
         title,
         link,
+        expiration: selectRef.current.value,
       });
       setData([
         ...data,
@@ -88,18 +81,24 @@ const Post = () => {
         ></PostInput>
         <label htmlFor="expiration" className="postFormLabel">
           Expiration
-          <select id="expiration">
-            <option value="1">1 Day</option>
-            <option value="7">1 Week</option>
-            <option value="14">2 Weeks</option>
-            <option value="30">1 Month</option>
+          <select id="expiration" ref={selectRef} defaultValue={30}>
+            <option value={1}>1 Day</option>
+            <option value={7}>1 Week</option>
+            <option value={14}>2 Weeks</option>
+            <option value={30}>1 Month</option>
           </select>
         </label>
         <PostButton aria-label="Create Post" type="submit">
           Create
         </PostButton>
       </PostForm>
-      <Table headers={headers} token={token} />
+      <Table
+        headers={headers}
+        formRef={formRef}
+        token={token}
+        data={data}
+        setData={setData}
+      />
     </PostDiv>
   );
 };
