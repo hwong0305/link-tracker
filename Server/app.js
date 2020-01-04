@@ -3,6 +3,7 @@ import cors from 'cors';
 import cron from 'node-cron';
 import Sequelize from 'sequelize';
 import adminRouter from './routers/adminRouter';
+import publicRouter from './routers/publicRouter';
 import userRouter from './routers/userRouter';
 import config from '../config/config';
 import db, { sequelize } from './db';
@@ -25,6 +26,7 @@ app.use(express.json()); // This replaces body-parser
 
 app.use('/admin', adminRouter);
 app.use('/posts', isAuthenticated, postRouter);
+app.use('/public', publicRouter);
 app.use('/users', userRouter);
 app.get('/', (_req, res) => {
   res.send('Hello World');

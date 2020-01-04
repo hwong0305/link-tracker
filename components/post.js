@@ -56,7 +56,7 @@ const Post = () => {
     <PostDiv>
       <h1 style={{ fontSize: '3.6rem' }}>Hello {user}!</h1>
       <PostForm method="POST" ref={formRef} onSubmit={addPost}>
-        <p style={{ color: 'red', fontSize: '1rem', lineHeight: '1rem' }}>
+        <p style={{ color: 'red', fontSize: '1.4rem', lineHeight: '1rem' }}>
           {err}
         </p>
         <PostInput

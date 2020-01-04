@@ -54,11 +54,7 @@ export const GlobalStyle = createGlobalStyle`
   table td .mobile {
     display: none;
   }
-<<<<<<< HEAD
   td.actions {
-=======
-  td.del {
->>>>>>> cf35804480b0d2b5478ecf5e8c39f2b4c896d046
     display: flex;
   }
   .deleteButton{
