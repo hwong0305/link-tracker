@@ -1,5 +1,5 @@
 import express from 'express';
-import { hashPassword, comparePassword, decryptURL } from '../helpers/crypto';
+import { hashPassword, comparePassword } from '../helpers/crypto';
 import db from '../db';
 import { signJwtToken } from '../helpers/jwt';
 import isAuthenticated from '../helpers/authentication';
@@ -24,11 +24,7 @@ userRouter.get('/posts', isAuthenticated, async (req, res) => {
         UserId: req.user.id,
       },
     });
-    const decryptedPosts = posts.map(post => ({
-      ...post.toJSON(),
-      link: decryptURL(post.link),
-    }));
-    res.json(decryptedPosts);
+    res.json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).send('Problem getting posts from user');
