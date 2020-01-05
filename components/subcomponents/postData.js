@@ -43,7 +43,12 @@ const PostData = props => {
       </td>
       <td>
         <span>Link</span>
-        <a href={link}>{link}</a>
+        <a className="desktop" href={link}>
+          {link}
+        </a>
+        <a className="mobile" href={link}>
+          Link
+        </a>
       </td>
       <td className="actions">
         <span>Delete / Deploy</span>
@@ -72,6 +77,8 @@ const PostData = props => {
           href={`${CLIENT_URL}/post/${id}`}
           className="share"
           style={{ marginLeft: '0.3em' }}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <ShareForward size={20}></ShareForward>
         </a>

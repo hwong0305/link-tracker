@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   table td {
     padding: 10px 20px;
     font-size: 1.4rem;
-    min-height: 42px;
+    min-height: 41px;
   }
   table td span {
     background: #eee;
@@ -79,6 +79,9 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   @media (max-width: 760px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
     table {
       margin-bottom: 6em;
     }
@@ -97,7 +100,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 -1px -1px 0;
       padding-top: 35px;
       position: relative;
-      width: 33.3%;
+      width: 33.3%
     }
     table td span {
       display: block;
@@ -106,7 +109,7 @@ export const GlobalStyle = createGlobalStyle`
       display: none;
     }
     table td .mobile {
-     display: inline-block;
+     display: block;
     }
   }
 `;

@@ -16,6 +16,11 @@ publicRouter.get('/post/:id', async (req, res) => {
     if (!post) {
       return res.status(404).send('Not Found');
     }
+
+    if (!post.shared) {
+      return res.status(401).send('Unauthorized');
+    }
+
     res.json(post);
   } catch (err) {
     console.log(err);

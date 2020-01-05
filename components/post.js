@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AuthContext } from '../context/authContext';
 import { PostForm, PostInput, PostButton } from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
-import Table from './subcomponents/postTable';
+import PostTable from './subcomponents/postTable';
 import { useData } from '../helpers/dataHook';
 
 const PostDiv = styled.div`
@@ -13,6 +13,7 @@ const PostDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  flex-wrap: wrap;
   padding-bottom: 3em;
   margin-bottom: 3em;
 `;
@@ -92,7 +93,7 @@ const Post = () => {
           Create
         </PostButton>
       </PostForm>
-      <Table
+      <PostTable
         headers={headers}
         formRef={formRef}
         token={token}

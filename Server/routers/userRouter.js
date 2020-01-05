@@ -72,4 +72,32 @@ userRouter.post('/register', validUser, async (req, res) => {
   }
 });
 
+// TODO use bookmark
+userRouter.post('/adopt', isAuthenticated, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      include: [
+        {
+          model: Post,
+          as: 'posts',
+        },
+      ],
+    });
+    const post = await Post.findOne({ where: { id } });
+    user.posts.push(post);
+
+    await user.save();
+    res.json(user);
+
+    if (!post) {
+      return res.status(400).send('Post does not exist');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error adopting a song');
+  }
+});
+
 export default userRouter;
