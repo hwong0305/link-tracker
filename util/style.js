@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle`
   table td {
     padding: 10px 20px;
     font-size: 1.4rem;
+    min-height: 41px;
   }
   table td span {
     background: #eee;
@@ -53,11 +54,11 @@ export const GlobalStyle = createGlobalStyle`
   table td .mobile {
     display: none;
   }
-  .del {
+  td.actions {
     display: flex;
   }
   .deleteButton{
-    color: red;
+    color: rgba(255, 50, 50, 0.7);
     border: none;
     background: inherit;
     padding: 0;
@@ -67,7 +68,20 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.4rem;
     text-align:left;
   }
+  .postFormLabel{
+    font-size: 1.4rem;
+    select {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      margin-left: 1em;
+      font-size: 1.4rem;
+      width: 100px;
+    }
+  }
   @media (max-width: 760px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
     table {
       margin-bottom: 6em;
     }
@@ -86,7 +100,7 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 -1px -1px 0;
       padding-top: 35px;
       position: relative;
-      width: 33.3%;
+      width: 33.3%
     }
     table td span {
       display: block;
@@ -94,9 +108,8 @@ export const GlobalStyle = createGlobalStyle`
     table td .desktop {
       display: none;
     }
-
     table td .mobile {
-     display: inline-block;
+     display: block;
     }
   }
 `;

@@ -1,5 +1,5 @@
 import express from 'express';
-import { hashPassword, comparePassword, decryptURL } from '../helpers/crypto';
+import { hashPassword, comparePassword } from '../helpers/crypto';
 import db from '../db';
 import { signJwtToken } from '../helpers/jwt';
 import isAuthenticated from '../helpers/authentication';
@@ -24,11 +24,7 @@ userRouter.get('/posts', isAuthenticated, async (req, res) => {
         UserId: req.user.id,
       },
     });
-    const decryptedPosts = posts.map(post => ({
-      ...post.toJSON(),
-      link: decryptURL(post.link),
-    }));
-    res.json(decryptedPosts);
+    res.json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).send('Problem getting posts from user');
@@ -73,6 +69,34 @@ userRouter.post('/register', validUser, async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('Error registering a user');
+  }
+});
+
+// TODO use bookmark
+userRouter.post('/adopt', isAuthenticated, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findOne({
+      where: { id: req.user.id },
+      include: [
+        {
+          model: Post,
+          as: 'posts',
+        },
+      ],
+    });
+    const post = await Post.findOne({ where: { id } });
+    user.posts.push(post);
+
+    await user.save();
+    res.json(user);
+
+    if (!post) {
+      return res.status(400).send('Post does not exist');
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error adopting a song');
   }
 });
 

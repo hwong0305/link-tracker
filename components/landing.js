@@ -2,9 +2,10 @@ const Landing = () => (
   <div style={{ width: '100%', textAlign: 'center' }}>
     <h1 style={{ fontSize: '4rem' }}>Hii Guys</h1>
     <p style={{ fontSize: '1.5rem' }}>
-      This website solves a very personal problem of mine. This allows you to
-      save link to anything (i.e. YouTube Links) but it deletes them after 30
-      days.
+      I build this project to solve a problem of mine. I have a habit of saving
+      YouTube videos onto my watch later list but they do not ever get cleared
+      out. This application is built to save YouTube links but automatically
+      save them after a link.
     </p>
   </div>
 );

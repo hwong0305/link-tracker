@@ -1,8 +1,10 @@
-import { Fragment, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AuthContext } from '../context/authContext';
 import { PostForm, PostInput, PostButton } from '../util/postForm';
 import fetchAdapter from '../helpers/fetchAdapter';
+import PostTable from './subcomponents/postTable';
+import { useData } from '../helpers/dataHook';
 
 const PostDiv = styled.div`
   width: 90%;
@@ -11,18 +13,20 @@ const PostDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  flex-wrap: wrap;
   padding-bottom: 3em;
   margin-bottom: 3em;
 `;
 
 const Post = () => {
+  const { user, token } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
-  const [data, setData] = useState([]);
   const [err, setErr] = useState('');
-  const { user, token } = useContext(AuthContext);
+  const [data, setData] = useData(token);
   const formRef = useRef(null);
-  const headers = ['Title', 'Link', 'Actions'];
+  const selectRef = useRef(null);
+  const headers = ['Title', 'Link', 'Delete/Deploy'];
 
   const resetForm = () => {
     setTitle('');
@@ -30,23 +34,13 @@ const Post = () => {
     formRef.current.reset();
   };
 
-  useEffect(() => {
-    fetchAdapter('/users/posts', 'GET', token).then(pData => {
-      const managedPostData = pData.map(post => ({
-        Title: post.title,
-        Link: post.link,
-        Id: post.id,
-      }));
-      setData(managedPostData);
-    });
-  }, []);
-
   const addPost = async e => {
     e.preventDefault();
     try {
       const postData = await fetchAdapter('/posts', 'POST', token, {
         title,
         link,
+        expiration: selectRef.current.value,
       });
       setData([
         ...data,
@@ -59,23 +53,11 @@ const Post = () => {
     }
   };
 
-  const removePost = async (id, index) => {
-    try {
-      await fetchAdapter(`/posts/${id}`, 'DELETE', token);
-      const newData = [...data];
-      newData.splice(index, 1);
-      setData(newData);
-    } catch (err) {
-      console.log(err);
-      alert('Error deleting post');
-    }
-  };
-
   return (
     <PostDiv>
       <h1 style={{ fontSize: '3.6rem' }}>Hello {user}!</h1>
       <PostForm method="POST" ref={formRef} onSubmit={addPost}>
-        <p style={{ color: 'red', fontSize: '1rem', lineHeight: '1rem' }}>
+        <p style={{ color: 'red', fontSize: '1.4rem', lineHeight: '1rem' }}>
           {err}
         </p>
         <PostInput
@@ -98,55 +80,26 @@ const Post = () => {
             setLink(e.target.value);
           }}
         ></PostInput>
+        <label htmlFor="expiration" className="postFormLabel">
+          Expiration
+          <select id="expiration" ref={selectRef} defaultValue={30}>
+            <option value={1}>1 Day</option>
+            <option value={7}>1 Week</option>
+            <option value={14}>2 Weeks</option>
+            <option value={30}>1 Month</option>
+          </select>
+        </label>
         <PostButton aria-label="Create Post" type="submit">
           Create
         </PostButton>
       </PostForm>
-      <table>
-        <thead>
-          <tr>
-            {headers.map((h, i) => (
-              <th key={i}>{h}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((it, i) => (
-            <tr key={i}>
-              {Object.entries(it).map(([k, v]) => (
-                <td key={k} className={k === 'Id' ? 'del' : ''}>
-                  <span>{k}</span>
-                  {k === 'Title' && v}
-                  {k === 'Link' && (
-                    <Fragment>
-                      <a href={v} className="desktop">
-                        {v}
-                      </a>
-                      <a href={v} className="mobile">
-                        Link
-                      </a>
-                    </Fragment>
-                  )}
-                  {k === 'Id' && (
-                    <button
-                      type="button"
-                      className="deleteButton"
-                      aria-label="Delete Post"
-                      onClick={() => {
-                        if (confirm('Are you sure you want to delete?')) {
-                          removePost(v, i);
-                        }
-                      }}
-                    >
-                      Delete
-                    </button>
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <PostTable
+        headers={headers}
+        formRef={formRef}
+        token={token}
+        data={data}
+        setData={setData}
+      />
     </PostDiv>
   );
 };
