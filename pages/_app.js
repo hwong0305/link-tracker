@@ -6,7 +6,6 @@ import { GlobalStyle } from '../util/style';
 function App(props) {
   const { Component, pageProps } = props;
   const [user, setUser] = useState('');
-  const [loggedIn, changeLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
 
   useEffect(() => {
@@ -15,7 +14,6 @@ function App(props) {
       const { user: tokenUser, token: tokenToken } = JSON.parse(data);
       setUser(tokenUser);
       setToken(tokenToken);
-      changeLoggedIn(!!tokenUser);
     }
   }, []);
 
@@ -29,9 +27,7 @@ function App(props) {
         <title>Link Tracker</title>
       </Head>
       <GlobalStyle />
-      <AuthContext.Provider
-        value={{ user, loggedIn, setUser, changeLoggedIn, token, setToken }}
-      >
+      <AuthContext.Provider value={{ user, setUser, token, setToken }}>
         <Component {...pageProps} />
       </AuthContext.Provider>
     </Fragment>

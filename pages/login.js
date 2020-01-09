@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import Cookie from 'js-cookie';
 import Link from 'next/link';
 import Router from 'next/router';
 import config from '../config/config';
@@ -18,7 +19,7 @@ const Login = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
-  const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
+  const { setUser, setToken } = useContext(AuthContext);
   const loginUser = async e => {
     e.preventDefault();
     if (!username.match(/[a-zA-Z0-9]{4}/)) {
@@ -45,7 +46,7 @@ const Login = () => {
       setErr('Incorrect username or password');
     } else {
       const { token } = await userRes.json();
-      changeLoggedIn(true);
+      Cookie.set('userstatus', token);
       setUser(username);
       setToken(token);
       Router.push('/');
