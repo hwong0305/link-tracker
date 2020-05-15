@@ -1,4 +1,5 @@
 import { Fragment, useContext, useState } from 'react';
+import Cookies from 'js-cookie';
 import { ThreeBars } from 'styled-icons/octicons/ThreeBars';
 import { AuthContext } from '../context/authContext';
 import MobileMenu from './subcomponents/mobileMenu';
@@ -13,12 +14,12 @@ import {
   StyledNav,
 } from '../util/nav';
 
-const Nav = () => {
+const Nav = ({ loggedIn, setLogin }) => {
   const [toggle, setToggle] = useState(false);
-  const { loggedIn, changeLoggedIn, setUser, setToken } = useContext(
-    AuthContext
-  );
+  const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
   const logout = () => {
+    Cookies.remove('userstatus');
+    setLogin(false);
     changeLoggedIn(false);
     setUser('');
     setToken('');

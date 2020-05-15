@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
-import { useContext } from 'react';
-import { AuthContext } from '../context/authContext';
+import Cookies from 'cookie';
 
 const MainPage = styled.div`
   display: flex;
@@ -15,26 +15,36 @@ const MainPage = styled.div`
 `;
 
 const NoSSRLanding = dynamic(() => import('../components/landing'), {
-  ssr: false,
+  ssr: true,
 });
 
 const NoSSRNav = dynamic(() => import('../components/nav'), {
-  ssr: false,
+  ssr: true,
 });
 
-const NoSSRPost = dynamic(() => import('../components/post'), { ssr: false });
+const NoSSRPost = dynamic(() => import('../components/post'), { ssr: true });
 
-const App = () => {
-  const { loggedIn } = useContext(AuthContext);
+const App = ({ status }) => {
+  const [loggedIn, setLogin] = useState(status);
   return (
     <div>
-      <NoSSRNav />
+      <NoSSRNav loggedIn={loggedIn} setLogin={setLogin} />
       <MainPage>
         {!loggedIn && <NoSSRLanding></NoSSRLanding>}
         {loggedIn && <NoSSRPost></NoSSRPost>}
       </MainPage>
     </div>
   );
+};
+
+App.getInitialProps = ({ req }) => {
+  const cookies = Cookies.parse(
+    req ? req.headers.cookie || '' : document.cookie
+  );
+
+  return {
+    status: cookies.userstatus,
+  };
 };
 
 export default App;
