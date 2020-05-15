@@ -37,12 +37,19 @@ postRouter.post(
   },
   async (req, res) => {
     try {
-      const { link, title } = req.body;
-      if (!link || !title) {
+      const { expiration, link, title } = req.body;
+      if (!link || !title || !expiration) {
         return res.status(400).send('Title or Link fields are not filled out');
       }
+      const expirationDate =
+        Date.now() + Number(expiration) * 1000 * 60 * 60 * 24;
       const { id: UserId } = req.user;
-      const post = await Post.create({ link, title, UserId });
+      const post = await Post.create({
+        expiration: expirationDate,
+        link,
+        title,
+        UserId,
+      });
       const postJ = { ...post.toJSON(), link };
       res.json(postJ);
     } catch (err) {

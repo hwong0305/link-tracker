@@ -14,21 +14,19 @@ import {
   StyledNav,
 } from '../util/nav';
 
-const Nav = ({ loggedIn, setLogin }) => {
+const Nav = () => {
   const [toggle, setToggle] = useState(false);
-  const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
+  const { user, setUser, setToken } = useContext(AuthContext);
   const logout = () => {
     Cookies.remove('userstatus');
-    setLogin(false);
-    changeLoggedIn(false);
-    setUser('');
-    setToken('');
+    setUser(null);
+    setToken(null);
   };
   return (
     <StyledNav>
       {toggle && (
         <MobileMenu
-          loggedIn={loggedIn}
+          loggedIn={!!user}
           logout={logout}
           click={() => {
             setToggle(!toggle);
@@ -44,7 +42,7 @@ const Nav = ({ loggedIn, setLogin }) => {
         }}
       >
         <CollapsingDiv>
-          {loggedIn ? (
+          {user ? (
             <Fragment>
               <NavButton>YouTube</NavButton>
               <NavButton onClick={logout}>Logout</NavButton>

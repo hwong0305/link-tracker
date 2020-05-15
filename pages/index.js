@@ -1,7 +1,9 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import Cookies from 'cookie';
+
+import { AuthContext } from '../context/authContext';
 
 const MainPage = styled.div`
   display: flex;
@@ -24,14 +26,14 @@ const NoSSRNav = dynamic(() => import('../components/nav'), {
 
 const NoSSRPost = dynamic(() => import('../components/post'), { ssr: true });
 
-const App = ({ status }) => {
-  const [loggedIn, setLogin] = useState(status);
+const App = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div>
-      <NoSSRNav loggedIn={loggedIn} setLogin={setLogin} />
+      <NoSSRNav />
       <MainPage>
-        {!loggedIn && <NoSSRLanding></NoSSRLanding>}
-        {loggedIn && <NoSSRPost></NoSSRPost>}
+        {!user && <NoSSRLanding></NoSSRLanding>}
+        {user && <NoSSRPost></NoSSRPost>}
       </MainPage>
     </div>
   );

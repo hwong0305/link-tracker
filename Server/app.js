@@ -39,7 +39,7 @@ sequelize.sync({ force: false }).then(() => {
     Post.destroy({
       where: {
         expiration: {
-          [Op.lt]: new Date(),
+          [Op.lt]: Date.now(),
         },
       },
     })

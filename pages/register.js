@@ -18,7 +18,7 @@ const Register = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
-  const { changeLoggedIn, setUser, setToken } = useContext(AuthContext);
+  const { setUser, setToken } = useContext(AuthContext);
   const registerUser = async e => {
     e.preventDefault();
     if (!username.match(/[a-zA-Z0-9]{4}/)) {
@@ -48,7 +48,6 @@ const Register = () => {
       );
     } else {
       const { token } = await userRes.json();
-      changeLoggedIn(true);
       setUser(username);
       setToken(token);
       Router.push('/');

@@ -83,6 +83,7 @@ const Post = () => {
         <label htmlFor="expiration" className="postFormLabel">
           Expiration
           <select id="expiration" ref={selectRef} defaultValue={30}>
+            <option value={0.0006944}>1 Minute</option>
             <option value={1}>1 Day</option>
             <option value={7}>1 Week</option>
             <option value={14}>2 Weeks</option>
