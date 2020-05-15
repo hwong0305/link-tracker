@@ -16,8 +16,8 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     expiration: {
-      type: DataTypes.DATE,
-      defaultValue: new Date(new Date(Date.now() + ONE_WEEK)),
+      type: DataTypes.BIGINT,
+      defaultValue: Date.now() + ONE_WEEK,
     },
     shared: {
       type: DataTypes.BOOLEAN,
