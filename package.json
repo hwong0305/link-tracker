@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "autofix": "eslint . --fix",
-    "dev": "next",
-    "prestart:myproxy": "next build",
-    "start:myproxy": "next start -p 3024",
+    "dev": "next -p 4543",
+    "start": "next start -p 3024",
     "server": "nodemon -r esm Server/app.js"
   },
   "dependencies": {

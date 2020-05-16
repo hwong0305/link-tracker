@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Zap } from 'styled-icons/boxicons-solid/Zap';
 import { Delete } from 'styled-icons/material/Delete';
 import { ShareForward } from 'styled-icons/remix-fill/ShareForward';
 import config from '../../config/config';
@@ -35,6 +36,16 @@ const PostData = props => {
     });
   };
 
+  const extendPost = () => {
+    fetchAdapter(`/posts/extend/${id}`, 'PUT', token)
+      .then(() => {
+        console.log('extend success');
+      })
+      .catch(err => {
+        alert(err.toString());
+      });
+  };
+
   return (
     <tr>
       <td>
@@ -51,7 +62,15 @@ const PostData = props => {
         </a>
       </td>
       <td className="actions">
-        <span>Delete / Deploy</span>
+        <span>Extend / Delete / Deploy</span>
+        <button
+          type="button"
+          className="extendButton"
+          aria-label="Update Post"
+          onClick={extendPost}
+        >
+          <Zap size={20} />
+        </button>
         <button
           type="button"
           className="deleteButton"
@@ -62,7 +81,7 @@ const PostData = props => {
             }
           }}
         >
-          <Delete size={20}></Delete>
+          <Delete size={20} />
         </button>
         <Checkbox
           type="checkbox"
@@ -71,8 +90,8 @@ const PostData = props => {
           checked={toggle}
           disabled={running}
           onChange={triggerToggle}
-        ></Checkbox>
-        <Switch htmlFor={id} className="switch"></Switch>
+        />
+        <Switch htmlFor={id} className="switch" />
         <a
           href={`${CLIENT_URL}/post/${id}`}
           className="share"
@@ -80,7 +99,7 @@ const PostData = props => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <ShareForward size={20}></ShareForward>
+          <ShareForward size={20} />
         </a>
       </td>
     </tr>

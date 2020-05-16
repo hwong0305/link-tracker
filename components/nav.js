@@ -43,10 +43,7 @@ const Nav = () => {
       >
         <CollapsingDiv>
           {user ? (
-            <Fragment>
-              <NavButton>YouTube</NavButton>
-              <NavButton onClick={logout}>Logout</NavButton>
-            </Fragment>
+            <NavButton onClick={logout}>Logout</NavButton>
           ) : (
             <Fragment>
               <NavLink href="/register" alt="Sign Up">

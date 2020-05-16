@@ -2,6 +2,7 @@ import express from 'express';
 import db from '../db';
 import { validatePost } from '../helpers/validation';
 
+const ONE_MONTH = 1000 * 60 * 60 * 24 * 30;
 const { Post } = db;
 const postRouter = express.Router();
 
@@ -90,6 +91,21 @@ postRouter.put('/:id', async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).send('Error updating a post');
+  }
+});
+
+postRouter.put('/extend/:id', async (req, res) => {
+  try {
+    const post = await Post.findOne({ where: { id: req.params.id } });
+    if (!post) {
+      return res.status(400).send('Post does not exist');
+    }
+    post.expiration = Date.now() + ONE_MONTH;
+    await post.save();
+    res.json(post);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send('Error extending post');
   }
 });
 

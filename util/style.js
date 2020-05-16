@@ -68,6 +68,17 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.4rem;
     text-align:left;
   }
+  .extendButton{
+    color: rgba(50, 50, 255, 0.7);
+    border: none;
+    background: inherit;
+    padding: 0;
+    height: 1.4rem;
+    cursor: pointer;
+    line-height: 1.4rem;
+    font-size: 1.4rem;
+    text-align:left;
+  }
   .postFormLabel{
     font-size: 1.4rem;
     select {
