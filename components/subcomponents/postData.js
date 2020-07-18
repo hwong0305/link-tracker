@@ -38,8 +38,8 @@ const PostData = props => {
 
   const extendPost = () => {
     fetchAdapter(`/posts/extend/${id}`, 'PUT', token)
-      .then(() => {
-        console.log('extend success');
+      .then(dat => {
+        console.log(dat);
       })
       .catch(err => {
         alert(err.toString());

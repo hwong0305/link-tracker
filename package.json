@@ -5,7 +5,8 @@
     "autofix": "eslint . --fix",
     "dev": "next -p 4543",
     "start": "next start -p 3024",
-    "server": "nodemon -r esm Server/app.js"
+    "server": "nodemon -r esm Server/app.js",
+    "serve": "concurrently \"npm run dev\" \"npm run server\""
   },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.8.0",
+    "concurrently": "^5.2.0",
     "esm": "^3.2.25",
     "nodemon": "^2.0.2"
   },
