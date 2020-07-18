@@ -1,6 +1,6 @@
 export default {
-  API_URL: process.env.API_URL || 'https://linksrv.devwong.com',
-  CLIENT_URL: process.env.CLIENT_URL || 'https://link.devwong.com',
+  API_URL: process.env.API_URL || 'https://locahost:8000',
+  CLIENT_URL: process.env.CLIENT_URL || 'https://locahost:3000',
   PORT: process.env.PORT || 8888,
   DB_NAME: process.env.DB_NAME || 'linktracker',
   DB_USER: process.env.DB_USER || 'linktracker',
